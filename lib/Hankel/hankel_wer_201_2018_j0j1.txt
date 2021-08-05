@@ -1,16 +1,26 @@
-# 201 pt Hankel (wavenumber->space) filter.
+# 201 point Hankel filter, J0 and J1
+# ==================================
 #
 # Designed and tested for controlled-source electromagnetic data.
 #
 # See the notebook `02-03-04-Figure_ExampleDesign.ipynb` in the repo
 # https://github.com/emsig/article-fdesign
 #
-# Citation
 #
-# Werthmüller, D., K. Key, and E. Slob, 2019,
-# A tool for designing digital filters for the Hankel and Fourier transforms in
-# potential, diffusive, and wavefield modeling: Geophysics, 84(2), F47-F56;
-# DOI: 10.1190/geo2018-0069.1.
+# > Werthmüller, D., K. Key, and E. Slob, 2019;
+# > A tool for designing digital filters for the Hankel and Fourier
+# > transforms in potential, diffusive, and wavefield modeling;
+# > Geophysics, 84(2), F47-F56;
+# > DOI: 10.1190/geo2018-0069.1
+#
+#
+# Copyright 2018 Dieter Werthmüller
+#
+# This work is licensed under a CC BY 4.0 license.
+# <http://creativecommons.org/licenses/by/4.0/>.
+#
+# This file is part of libdlf.
+#
 #
 # base                       j0                         j1
 8.653980893285999343e-04   2.940900904253498815e+00  -2.594301879688918743e-03
