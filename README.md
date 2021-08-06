@@ -1,24 +1,14 @@
 # Digital Linear Filter Library
 
-Library for Digital Linear Filters (DLF), as used, for instance, in Geophysics
+Library for Digital Linear Filters (DLF) as used, for instance, in Geophysics
 for electromagnetic modelling.
 
-## Todo
-
-- [ ] Add filters.
-- [ ] Write *Digital Linear Filters* section, with references to most important
-      articles.
-- [ ] Write *What is `lib-dlf`*.
-- [ ] Contact some authors and ask if their filters can be added under the
-      CC-BY-4.0.
-- [ ] Do not forget: Laplace filters, GPR filter, Q-kernel filter.
-- [ ] Add code examples.
-- [ ] Think about language-specific, binary distribution.
 
 ## Table of contents
 
+- [Todo](#todo)
 - [Digital Linear Filters](#digital-linear-filters)
-- [What is `lib-dlf`](#what-is-lib-dlf)
+- [What is `libdlf`](#what-is-libdlf)
   - [File naming](#file-naming)
   - [File format](#file-format)
   - [Structure](#structure)
@@ -32,6 +22,27 @@ for electromagnetic modelling.
 - [License](#license)
 
 
+## Todo
+
+**This library is work in progress and at an early stage; several pieces are
+still missing.** However, the library structure and file format is fixed, so
+you can start using it. What will hopefully come in the future in addition are
+binaries and easily installable packages for different programming languages.
+
+- [ ] Add a file that maps files to metadata (e.g., `lib/filters.json`).
+- [ ] Add filters.
+- [ ] Write *Digital Linear Filters* section, with references to most important
+      articles.
+- [ ] Write *What is `libdlf`*.
+- [ ] Contact some authors and ask if their filters can be added under the
+      CC-BY-4.0.
+- [ ] Do not forget: Laplace filters, GPR filter, Q-kernel filter.
+- [ ] Add code examples of its usage.
+- [ ] Add CI tests for all filters.
+- [ ] Add CI to compile binary file (HDF5?)
+- [ ] Add CI for language-specific distributions using the binary file.
+
+
 ## Digital Linear Filters
 
 TODO: brief theory and history, main references.
@@ -40,7 +51,7 @@ TODO: Some examples and figures, particularly to show what happens when you
 reach the limit of a filter.
 
 
-## What is `lib-dlf`
+## What is `libdlf`
 
 TODO
 
