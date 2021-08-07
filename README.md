@@ -40,12 +40,15 @@ in the [empymod](https://empymod.emsig.xyz) documentation.
 
 ### Python
 
+TODO: Installation instructions using `pip` or `conda`.
+
 ```python
-base, j0, j1 = np.loadtxt('link-to-file.txt')
-# Do transform example.
+import libdlf
+base, j0, j1 = libdlf.hankel.wer_201_2018()
+
+# TODO: Do actual transform with the filter.
 ```
 
-Todo: Add example using pooch for implementation in libraries.
 
 
 ### Julia
