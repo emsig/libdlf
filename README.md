@@ -7,10 +7,6 @@ for electromagnetic modelling.
 ## Table of contents
 
 - [Digital Linear Filters](#digital-linear-filters)
-- [What is `libdlf`](#what-is-libdlf)
-  - [File naming](#file-naming)
-  - [File format](#file-format)
-  - [Structure](#structure)
 - [Usage](#usage)
   - [Python](#python)
   - [Julia](#julia)
@@ -18,7 +14,11 @@ for electromagnetic modelling.
   - [Fortran](#fortran)
 - [Contributing](#contributing)
   - [New filters](#new-filters)
-- [License](#license)
+- [What is `libdlf`](#what-is-libdlf)
+  - [File naming](#file-naming)
+  - [File format](#file-format)
+  - [Structure](#structure)
+  - [json](#json)
 
 
 ## Digital Linear Filters
@@ -26,12 +26,70 @@ for electromagnetic modelling.
 TODO: brief theory and history, main references.
 
 TODO: Some examples and figures, particularly to show what happens when you
-reach the limit of a filter.
+reach the limit of a filter (longer is not necessary better).
+
+
+## Usage
+
+The examples here show how to use the filters for the standard filter method.
+However, often you want to use the lagged convolution variant of DLF, in order
+to reduce the required input values. Have a look at the example
+[educational/dlf_standard_lagged_splined.html](https://empymod.emsig.xyz/en/stable/gallery/educational/dlf_standard_lagged_splined.html)
+in the [empymod](https://empymod.emsig.xyz) documentation.
+
+
+### Python
+
+```python
+base, j0, j1 = np.loadtxt('link-to-file.txt')
+# Do transform example.
+```
+
+Todo: Add example using pooch for implementation in libraries.
+
+
+### Julia
+
+
+### Matlab
+
+
+### Fortran
+
+
+## Contributing
+
+We welcome contributions of any kind. New filters, better documentation,
+cleverer or easier distribution, typos, you name it. Simply open an issue or
+create a PR!
+
+
+### New filters
+
+We welcome any filter that has proven its merits! Simply create a pull request
+adding your filter. Please make sure to
+
+1. State in the PR explicitly that you give permission to distribute your
+   filter under the CC-BY license.
+2. You followed the file naming and file format outlined below, and add it to
+   the `lib/filters.json` file.
 
 
 ## What is `libdlf`
 
-TODO
+A library for digital linear filters. Codes until now had to hard-code their
+digital linear filters. This has several disadvantages:
+
+- It adds a lot of "numbers" to the code base which has nothing really to do
+  with the code.
+- Codes have therefore often only one or a few filters, and it is hard to try
+  other filters, as they are hard-coded.
+- It can be hard to find filters of published results or similar.
+
+Having a common library that can be used by any code base in any language
+should hopefully widen the adoption of linear filters, make their use more
+reproducible, and might hopefully even spark the design of new, hopefully more
+robust filters or filters for new applications.
 
 
 ### File naming
@@ -43,14 +101,15 @@ parts are separated by underscores (all lowercase, file ending is `.txt`):
 2. 3-6 characters of first author or first initials of authors. E.g., `wer`.
 3. Number of points. E.g. `201`.
 4. Year. E.g. `2018`.  
-   (This can be followed by a lowercase letter if there are several filters of
-   the same type, author, number of points, and year.)
+   (This can be followed by an appendix, a lowercase letter if there are
+   several filters of the same type, author, number of points, and year.)
 5. Values provided in the file, in the correct order. E.g. `j0j1`.  
    Accepted values:
    - Hankel: j0, j1, j2
    - Fourier: sin, cos
 
 The given examples yield the filter file name `hankel_wer_201_2018_j0j1.txt`.
+
 
 ### File format
 
@@ -109,46 +168,22 @@ lib
 ```
 
 
-## Usage
+### json
 
-The examples here show how to use the filters for the standard filter method.
-However, often you want to use the lagged convolution variant of DLF, in order
-to reduce the required input values. Have a look at the example
-[educational/dlf_standard_lagged_splined.html](https://empymod.emsig.xyz/en/stable/gallery/educational/dlf_standard_lagged_splined.html)
-in the [empymod](https://empymod.emsig.xyz) documentation.
+It might seem like a lot of duplication: File name, header info, and in
+addition a json that maps meta-data to files.
 
+The advantage of this is that on one hand one can copy a single filter by
+simply coping a file, which then contains all required info. The json file, on
+the other hand, is good for machines, providing a rich way to choose filters
+and load them. The json is, for instance, the ideal place for a script to
+create a deployable package for a specific language.
 
-### Python
-
-```python
-base, j0, j1 = np.loadtxt('link-to-file.txt')
-# Do transform example.
-```
-
-Todo: Add example using pooch for implementation in libraries.
-
-
-### Julia
-
-
-### Matlab
-
-
-### Fortran
-
-
-## Contributing
-
-We welcome contributions of any kind. New filters, better documentation,
-cleverer or easier distribution, typos, you name it. Simply open an issue or
-create a PR!
-
-
-### New filters
-
-We welcome any filter that has proven its merits! Simply create a pull request
-adding your filter. Please make sure to
-
-1. State in the PR explicitly that you give permission to distribute your
-   filter under the CC-BY license.
-2. You followed the file naming and file format outlined above.
+For the format of the json simply have a look at it. The top-level entries
+depict the transform types (e.g., `"hankel"`), and the different filters are
+then added as an array. Each filter has exactly the following entries:
+`"name"`, `"author"`, `"year"`, `"appendix"`, `"points"`, `"values"`, and
+`"file"`. Points is an integer, and all others are strings; values is a
+comma-separated list. The file is the relative path to the corresponding
+filter, starting at `lib/`. Appendix will be an empty string, `""`, in most
+cases (see above under *File naming*).

@@ -5,8 +5,8 @@
       "author": "Kerry Key",
       "year": "2009",
       "appendix": "",
-      "points": "101",
-      "values": "j0, j1",
+      "points": 101,
+      "values": "j0,j1",
       "file": "lib/Hankel/hankel_key_101_2009_j0j1.txt"
     },
     {
@@ -14,8 +14,8 @@
       "author": "Kerry Key",
       "year": "2009",
       "appendix": "",
-      "points": "201",
-      "values": "j0, j1",
+      "points": 201,
+      "values": "j0,j1",
       "file": "lib/Hankel/hankel_key_201_2009_j0j1.txt"
     },
     {
@@ -23,8 +23,8 @@
       "author": "Kerry Key",
       "year": "2009",
       "appendix": "",
-      "points": "401",
-      "values": "j0, j1",
+      "points": 401,
+      "values": "j0,j1",
       "file": "lib/Hankel/hankel_key_401_2009_j0j1.txt"
     },
     {
@@ -32,8 +32,8 @@
       "author": "Kerry Key",
       "year": "2012",
       "appendix": "",
-      "points": "51",
-      "values": "j0, j1",
+      "points": 51,
+      "values": "j0,j1",
       "file": "lib/Hankel/hankel_key_51_2012_j0j1.txt"
     },
     {
@@ -41,8 +41,8 @@
       "author": "Kerry Key",
       "year": "2012",
       "appendix": "",
-      "points": "101",
-      "values": "j0, j1",
+      "points": 101,
+      "values": "j0,j1",
       "file": "lib/Hankel/hankel_key_101_2012_j0j1.txt"
     },
     {
@@ -50,8 +50,8 @@
       "author": "Kerry Key",
       "year": "2012",
       "appendix": "",
-      "points": "201",
-      "values": "j0, j1",
+      "points": 201,
+      "values": "j0,j1",
       "file": "lib/Hankel/hankel_key_201_2012_j0j1.txt"
     },
     {
@@ -59,8 +59,8 @@
       "author": "Dieter Werthmüller",
       "year": "2018",
       "appendix": "",
-      "points": "201",
-      "values": "j0, j1",
+      "points": 201,
+      "values": "j0,j1",
       "file": "lib/Hankel/hankel_wer_201_2018_j0j1.txt"
     },
     {
@@ -68,8 +68,8 @@
       "author": "Dieter Werthmüller",
       "year": "2018",
       "appendix": "",
-      "points": "2001",
-      "values": "j0, j1",
+      "points": 2001,
+      "values": "j0,j1",
       "file": "lib/Hankel/hankel_wer_2001_2018_j0j1.txt"
     }
   ],
@@ -79,8 +79,8 @@
       "author": "Kerry Key",
       "year": "2009",
       "appendix": "",
-      "points": "81",
-      "values": "sin, cos",
+      "points": 81,
+      "values": "sin,cos",
       "file": "lib/Fourier/fourier_key_81_2009_sincos.txt"
     },
     {
@@ -88,8 +88,8 @@
       "author": "Kerry Key",
       "year": "2009",
       "appendix": "",
-      "points": "241",
-      "values": "sin, cos",
+      "points": 241,
+      "values": "sin,cos",
       "file": "lib/Fourier/fourier_key_241_2009_sincos.txt"
     },
     {
@@ -97,8 +97,8 @@
       "author": "Kerry Key",
       "year": "2009",
       "appendix": "",
-      "points": "601",
-      "values": "sin, cos",
+      "points": 601,
+      "values": "sin,cos",
       "file": "lib/Fourier/fourier_key_601_2009_sincos.txt"
     },
     {
@@ -106,8 +106,8 @@
       "author": "Kerry Key",
       "year": "2012",
       "appendix": "",
-      "points": "101",
-      "values": "sin, cos",
+      "points": 101,
+      "values": "sin,cos",
       "file": "lib/Fourier/fourier_key_101_2012_sincos.txt"
     },
     {
@@ -115,8 +115,8 @@
       "author": "Kerry Key",
       "year": "2012",
       "appendix": "",
-      "points": "201",
-      "values": "sin, cos",
+      "points": 201,
+      "values": "sin,cos",
       "file": "lib/Fourier/fourier_key_201_2012_sincos.txt"
     }
   ]
