@@ -3,7 +3,7 @@
 #
 # Designed and tested for controlled-source electromagnetic data.
 #
-# See the notebook `02-03-04-Figure_ExampleDesign.ipynb` in the repo
+# See the notebook `Filter-wer201.ipynb` in the repo
 # https://github.com/emsig/article-fdesign
 #
 #
