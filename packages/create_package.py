@@ -1,19 +1,59 @@
 import json
 import shutil
 import pathlib
+from os.path import abspath
 
 # Create package directory
-pathlib.Path("libdlf").mkdir(parents=True, exist_ok=True)
+pathlib.Path(abspath("python/libdlf")).mkdir(parents=True, exist_ok=True)
 
 # Copy library to python package
-shutil.copytree('../../lib', 'libdlf/lib', dirs_exist_ok=True)
+shutil.copytree(abspath('../lib'), abspath('python/libdlf/lib'),
+                dirs_exist_ok=True)
+
+# Copy README and LICENSE
+shutil.copyfile('../README.md', 'python/README.md')
+shutil.copyfile('../LICENSE', 'python/LICENSE')
+
+# Create setup.py
+setup = """# -*- coding: utf-8 -*-
+import os
+from setuptools import setup
+
+# Longer description
+readme = ('Library for Digital Linear Filters (DLF) as used, for instance, '
+          'in Geophysics for electromagnetic modelling. See '
+          'https://github.com/emsig/libdlf')
+
+setup(
+    name="libdlf",
+    description="Library for Digital Linear Filters (DLF)",
+    long_description=readme,
+    author="The emsig community",
+    author_email="info@emsig.xyz",
+    url="https://github.com/emsig/libdlf",
+    license="CC-BY-4.0",
+    packages=["libdlf"],
+    install_requires=[
+        "numpy",
+    ],
+    use_scm_version={
+        "root": "../../",
+        "relative_to": __file__,
+        "write_to": os.path.join("packages", "python", "libdlf", "version.py"),
+    },
+    setup_requires=["setuptools_scm"],
+)
+"""
+with open(abspath("python/setup.py"), "w") as fs:
+    fs.write(setup)
+
 
 # Read json
-with open('libdlf/lib/filters.json') as fj:
+with open(abspath('python/libdlf/lib/filters.json')) as fj:
     lib = json.load(fj)
 
 # Create init file
-with open('libdlf/__init__.py', 'w') as fi:
+with open(abspath('python/libdlf/__init__.py'), 'w') as fi:
 
     # Loop over transforms and add them
     for transform, flist in lib.items():
@@ -24,7 +64,7 @@ with open('libdlf/__init__.py', 'w') as fi:
 for transform, flist in lib.items():
 
     # Create transform file and loop over filters
-    with open(f"libdlf/{transform}.py", "w") as ft:
+    with open(abspath(f"python/libdlf/{transform}.py"), "w") as ft:
 
         # Imports
         ft.write("import os\n")
@@ -46,7 +86,7 @@ for transform, flist in lib.items():
             ft.write(f"def {filt['name']}():")
 
             # Get and write header
-            with open(f"libdlf/{fname}") as fl:
+            with open(abspath(f"python/libdlf/{fname}")) as fl:
 
                 # Add title
                 ft.write(f'\n    """{fl.readline()[2: ]}')
@@ -83,8 +123,8 @@ for transform, flist in lib.items():
 
             # Write function; we use np.loadtxt to read the files
             ft.write(f"    fname = '{fname}'\n")
-            ft.write('    return np.loadtxt('
-                     'f"{LIBPATH}/{fname}", unpack=True)\n')
+            ft.write('    return np.loadtxt(os.path.join('
+                     'LIBPATH, fname), unpack=True)\n')
 
             # Empty lines after function (except for last filter)
             if f_i < nr_filt-1:
