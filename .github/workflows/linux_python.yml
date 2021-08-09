@@ -95,10 +95,6 @@ jobs:
           # to be able to push to GitHub.
           persist-credentials: false
 
-      # Need the tags so that setuptools_scm can form a valid version number
-      - name: Fetch git tags
-        run: git fetch origin 'refs/tags/*:refs/tags/*'
-
       - name: Setup Python
         uses: actions/setup-python@v2
         with:
@@ -114,6 +110,12 @@ jobs:
         run: |
           cd packages
           python create_package.py
+
+      # Need the tags so that setuptools_scm can form a valid version number
+      - name: Fetch git tags
+        run: :
+            cd packages/python
+            git fetch origin 'refs/tags/*:refs/tags/*'
 
       - name: Replace naming scheme
         if: github.ref == 'refs/heads/main'
