@@ -1,4 +1,3 @@
-import os
 import json
 import shutil
 import pathlib
@@ -10,9 +9,6 @@ pathlib.Path(abspath("python/libdlf")).mkdir(parents=True, exist_ok=True)
 # Copy library to python package
 shutil.copytree(abspath('../lib'), abspath('python/libdlf/lib'),
                 dirs_exist_ok=True)
-
-# Create symlink for .git (for scm versioning)
-os.symlink(abspath('../.git'), abspath('python/.git'), True)
 
 # Copy README and LICENSE
 shutil.copyfile('../README.md', 'python/README.md')
@@ -42,9 +38,9 @@ setup(
         "numpy",
     ],
     use_scm_version={
-        "root": ".",
+        "root": "../../",
         "relative_to": __file__,
-        "write_to": os.path.join("libdlf", "version.py"),
+        "write_to": os.path.join("packages", "python", "libdlf", "version.py"),
     },
     setup_requires=["setuptools_scm"],
 )
