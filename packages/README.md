@@ -25,7 +25,7 @@ pip install  python/. --use-feature=in-tree-build
 To clear it, run
 
 ```bash
-pip -rf python/
+rm -rf python/
 ```
 
 (All commands are meant to be run within the `packages` directory.)
