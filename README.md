@@ -1,5 +1,7 @@
 # Digital Linear Filter Library
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5172893.svg)](https://doi.org/10.5281/zenodo.5172893)
+
 Library for Digital Linear Filters (DLF) as used, for instance, in Geophysics
 for electromagnetic modelling.
 
@@ -40,6 +42,11 @@ in the [empymod](https://empymod.emsig.xyz) documentation.
 
 ### Python
 
+[![PyPI](https://img.shields.io/pypi/v/libdlf)](https://pypi.python.org/pypi/libdlf/)
+[![conda-forge](https://img.shields.io/conda/vn/conda-forge/libdlf)](https://anaconda.org/conda-forge/libdlf/)
+[![py-versions](https://img.shields.io/badge/python-3.6+-blue.svg)](https://www.python.org/downloads/)
+[![platforms](https://img.shields.io/badge/platform-linux,win,osx-blue)](https://anaconda.org/conda-forge/libdlf/)
+
 You can install `libdlf` for python via `pip` or `conda`:
 ```bash
 pip install libdlf
@@ -60,14 +67,19 @@ base, j0, j1 = libdlf.hankel.wer_201_2018()
 ```
 
 
-
 ### Julia
+
+ToDo
 
 
 ### Matlab
 
+ToDo
+
 
 ### Fortran
+
+ToDo
 
 
 ## Contributing
