@@ -1,5 +1,7 @@
 # Digital Linear Filter Library
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5172893.svg)](https://doi.org/10.5281/zenodo.5172893)
+
 Library for Digital Linear Filters (DLF) as used, for instance, in Geophysics
 for electromagnetic modelling.
 
@@ -65,14 +67,19 @@ base, j0, j1 = libdlf.hankel.wer_201_2018()
 ```
 
 
-
 ### Julia
+
+ToDo
 
 
 ### Matlab
 
+ToDo
+
 
 ### Fortran
+
+ToDo
 
 
 ## Contributing
