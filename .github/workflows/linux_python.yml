@@ -115,7 +115,6 @@ jobs:
         run: |
           cd packages
           python create_package.py
-          cd python
 
       - name: Build source and wheel distributions
         if: github.ref == 'refs/heads/main'
@@ -123,11 +122,13 @@ jobs:
           # Change setuptools-scm local_scheme to "no-local-version" so the
           # local part of the version isn't included, making the version string
           # compatible with Test PyPI.
+          cd packages/python
           sed --in-place 's/"root"/"local_scheme":"no-local-version","root"/g' setup.py
 
       - name: Build source and wheel distributions
         run: |
           # Build source and wheel packages
+          cd packages/python
           python setup.py sdist
           python setup.py bdist_wheel
           echo ""
