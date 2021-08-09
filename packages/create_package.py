@@ -65,9 +65,18 @@ with open(abspath('python/libdlf/lib/filters.json')) as fj:
 # Create init file
 with open(abspath('python/libdlf/__init__.py'), 'w') as fi:
 
+    fi.write("from datetime import datetime\n")
+
     # Loop over transforms and add them
     for transform, flist in lib.items():
         fi.write(f"from libdlf import {transform}\n")
+
+    fi.write(
+        "try:\n"
+        "    from libdlf.version import version as __version__\n"
+        "except ImportError:\n"
+        "    __version__ = 'unknown-'+datetime.today().strftime('%Y%m%d')\n"
+    )
 
 
 # Loop over transforms
