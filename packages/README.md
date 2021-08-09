@@ -13,17 +13,19 @@ The python package is created by running
 python create_package.py
 ```
 
-Required to build are `numpy` and `setuptools_scm`.
-
-The directory `python` has some scripts, the rest will be built with the above
-command. The entire library is also copied to `python/libdlf/lib/`.
+The build requires `setuptools_scm`; the only dependency to use the package is
+`numpy`.
 
 If you want to install the package created in this manner, run
+
 ```bash
-pip install -e python
+pip install  python/. --use-feature=in-tree-build
 ```
 
 To clear it, run
+
 ```bash
 pip -rf python/
 ```
+
+(All commands are meant to be run within the `packages` directory.)

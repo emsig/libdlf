@@ -33,6 +33,7 @@ setup(
     url="https://github.com/emsig/libdlf",
     license="CC-BY-4.0",
     packages=["libdlf"],
+    include_package_data=True,
     install_requires=[
         "numpy",
     ],
@@ -47,6 +48,10 @@ setup(
 with open(abspath("python/setup.py"), "w") as fs:
     fs.write(setup)
 
+# Create MANIFEST.in
+with open(abspath("python/MANIFEST.in"), "w") as fm:
+    fm.write("include libdlf/lib/filters.json\n")
+    fm.write("include libdlf/lib/*/*.txt")
 
 # Read json
 with open(abspath('python/libdlf/lib/filters.json')) as fj:
@@ -71,7 +76,10 @@ for transform, flist in lib.items():
         ft.write("import numpy as np\n\n\n")
 
         # Path of the library
-        ft.write("LIBPATH = os.path.abspath(os.path.dirname(__file__))\n\n\n")
+        ft.write("_LIBPATH = os.path.abspath(os.path.dirname(__file__))\n")
+
+        # Cache for the filters
+        ft.write("_CACHE = {}\n\n\n")
 
         # Number of filters for this transform
         nr_filt = len(flist)
@@ -106,10 +114,11 @@ for transform, flist in lib.items():
                     elif 'file is part of libdlf' in line:
 
                         # Add returned values
-                        ft.write("    Returns\n")
+                        ft.write("\n    Returns\n")
                         ft.write("    -------\n")
                         values = filt['values'].replace(',', ', ')
-                        ft.write(f"    base, {values}\n\n")
+                        ft.write(f"    base, {values} : ndarray\n")
+                        ft.write(f"        Filter base and its values.\n\n")
 
                         # Finish header
                         ft.write('    """\n')
@@ -122,9 +131,12 @@ for transform, flist in lib.items():
                         ft.write(f"    {line[2:]}")
 
             # Write function; we use np.loadtxt to read the files
-            ft.write(f"    fname = '{fname}'\n")
-            ft.write('    return np.loadtxt(os.path.join('
-                     'LIBPATH, fname), unpack=True)\n')
+            ft.write(
+                f"    if '{filt['name']}' not in _CACHE.keys():\n"
+                f"        fname = '{fname}'\n"
+                f"        _CACHE['{filt['name']}'] = np.loadtxt(\n"
+                "            os.path.join(_LIBPATH, fname), unpack=True)\n"
+                f"    return _CACHE['{filt['name']}']\n")
 
             # Empty lines after function (except for last filter)
             if f_i < nr_filt-1:
