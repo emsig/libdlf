@@ -40,7 +40,17 @@ in the [empymod](https://empymod.emsig.xyz) documentation.
 
 ### Python
 
-TODO: Installation instructions using `pip` or `conda`.
+You can install `libdlf` for python via `pip` or `conda`:
+```bash
+pip install libdlf
+```
+or
+```bash
+conda install -c conda-forge libdlf
+```
+
+The package is structured into transform types. Each filter returns its base
+and corresponding values as numpy arrays.
 
 ```python
 import libdlf

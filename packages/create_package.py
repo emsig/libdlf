@@ -48,6 +48,11 @@ setup(
 with open(abspath("python/setup.py"), "w") as fs:
     fs.write(setup)
 
+# Create setup.cfg
+with open(abspath("python/setup.cfg"), "w") as fs:
+    fs.write("[flake8]\n")
+    fs.write("per-file-ignores = __init__.py: F401")
+
 # Create MANIFEST.in
 with open(abspath("python/MANIFEST.in"), "w") as fm:
     fm.write("include libdlf/lib/filters.json\n")
@@ -118,7 +123,7 @@ for transform, flist in lib.items():
                         ft.write("    -------\n")
                         values = filt['values'].replace(',', ', ')
                         ft.write(f"    base, {values} : ndarray\n")
-                        ft.write(f"        Filter base and its values.\n\n")
+                        ft.write("        Filter base and its values.\n\n")
 
                         # Finish header
                         ft.write('    """\n')
