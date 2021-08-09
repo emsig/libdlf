@@ -117,7 +117,7 @@ jobs:
           python create_package.py
 
       - name: Build source and wheel distributions
-        if: github.ref == 'refs/heads/main'
+        #if: github.ref == 'refs/heads/main'
         run: |
           # Change setuptools-scm local_scheme to "no-local-version" so the
           # local part of the version isn't included, making the version string
