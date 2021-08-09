@@ -42,10 +42,10 @@ in the [empymod](https://empymod.emsig.xyz) documentation.
 
 ### Python
 
-![PyPI](https://img.shields.io/pypi/v/libdlf)
-![conda-forge](https://img.shields.io/conda/vn/conda-forge/libdlf)
-![py-versions](https://img.shields.io/badge/python-3.6+-blue.svg)
-![platforms](https://img.shields.io/badge/platform-linux,win,osx-blue)
+[![PyPI](https://img.shields.io/pypi/v/libdlf)](https://pypi.python.org/pypi/libdlf/)
+[![conda-forge](https://img.shields.io/conda/vn/conda-forge/libdlf)](https://anaconda.org/conda-forge/libdlf/)
+[![py-versions](https://img.shields.io/badge/python-3.6+-blue.svg)](https://www.python.org/downloads/)
+[![platforms](https://img.shields.io/badge/platform-linux,win,osx-blue)](https://anaconda.org/conda-forge/libdlf/)
 
 You can install `libdlf` for python via `pip` or `conda`:
 ```bash
