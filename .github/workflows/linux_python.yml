@@ -134,6 +134,11 @@ jobs:
           echo ""
           echo "Generated files:"
           ls -lh dist/
+          # Copy them to root so they will be found to upload
+          cp -r dist ../../.
+          cp -r build ../../.
+          cp -r .eggs ../../.
+          cp -r libdlf.egg-info ../../.
 
       - name: Publish to Test PyPI
         if: success()
