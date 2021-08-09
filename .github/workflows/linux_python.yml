@@ -113,7 +113,7 @@ jobs:
 
       # Need the tags so that setuptools_scm can form a valid version number
       - name: Fetch git tags
-        run: :
+        run: |
             cd packages/python
             git fetch origin 'refs/tags/*:refs/tags/*'
 
