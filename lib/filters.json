@@ -118,6 +118,15 @@
       "points": 201,
       "values": "sin,cos",
       "file": "lib/Fourier/fourier_key_201_2012_sincos.txt"
+    },
+    {
+      "name" : "grayver_50_2021",
+      "author": "Alexander V. Grayver",
+      "year": "2021",
+      "appendix": "",
+      "points": 50,
+      "values": "sin",
+      "file": "lib/Fourier/fourier_grayver_50_2021_sin.txt"
     }
   ]
 }
