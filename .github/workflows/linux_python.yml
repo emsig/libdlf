@@ -142,7 +142,7 @@ jobs:
         with:
           user: __token__
           password: ${{ secrets.TEST_PYPI_PASSWORD }}
-          packages_dir: packages/python/
+          packages_dir: packages/python/dist/
           repository_url: https://test.pypi.org/legacy/
           # Allow existing releases on test PyPI without errors.
           # NOT TO BE USED in PyPI!
@@ -156,4 +156,4 @@ jobs:
         with:
           user: __token__
           password: ${{ secrets.PYPI_PASSWORD }}
-          packages_dir: packages/python/
+          packages_dir: packages/python/dist/
