@@ -56,7 +56,8 @@ with open(abspath("python/setup.cfg"), "w") as fs:
 # Create MANIFEST.in
 with open(abspath("python/MANIFEST.in"), "w") as fm:
     fm.write("include libdlf/lib/filters.json\n")
-    fm.write("include libdlf/lib/*/*.txt")
+    fm.write("include libdlf/lib/*/*.txt\n")
+    fm.write("exclude MANIFEST.in\n")
 
 # Read json
 with open(abspath('python/libdlf/lib/filters.json')) as fj:
