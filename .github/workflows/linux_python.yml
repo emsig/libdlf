@@ -133,13 +133,7 @@ jobs:
           python setup.py bdist_wheel
           echo ""
           echo "Generated files:"
-          ls -lh .
-          #dist/
-          # Copy them to root so they will be found to upload
-          cp -r dist ../../.
-          cp -r build ../../.
-          #cp -r .eggs ../../.
-          #cp -r libdlf.egg-info ../../.
+          ls -lh dist/
 
       - name: Publish to Test PyPI
         if: success()
@@ -148,6 +142,7 @@ jobs:
         with:
           user: __token__
           password: ${{ secrets.TEST_PYPI_PASSWORD }}
+          packages_dir: packages/python/
           repository_url: https://test.pypi.org/legacy/
           # Allow existing releases on test PyPI without errors.
           # NOT TO BE USED in PyPI!
@@ -161,3 +156,4 @@ jobs:
         with:
           user: __token__
           password: ${{ secrets.PYPI_PASSWORD }}
+          packages_dir: packages/python/
