@@ -10,9 +10,6 @@ pathlib.Path(abspath("python/libdlf")).mkdir(parents=True, exist_ok=True)
 shutil.copytree(abspath('../lib'), abspath('python/libdlf/lib'),
                 dirs_exist_ok=True)
 
-# We need to copy the git folder, so scm can create the correct version number
-shutil.copytree(abspath('../.git'), abspath('python/.git'), dirs_exist_ok=True)
-
 # Copy README and LICENSE
 shutil.copyfile('../README.md', 'python/README.md')
 shutil.copyfile('../LICENSE', 'python/LICENSE')
@@ -41,9 +38,9 @@ setup(
         "numpy",
     ],
     use_scm_version={
-        "root": ".",
+        "root": "../../",
         "relative_to": __file__,
-        "write_to": os.path.join("libdlf", "version.py"),
+        "write_to": os.path.join("packages", "python", "libdlf", "version.py"),
     },
     setup_requires=["setuptools_scm"],
 )
