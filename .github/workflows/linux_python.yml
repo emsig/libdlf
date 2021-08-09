@@ -70,7 +70,7 @@ jobs:
         run: |
           cd packages
           python create_package.py
-          pip install  python/. --use-feature=in-tree-build
+          pip install python/. --use-feature=in-tree-build
           cd python
           pytest --flake8
 
@@ -110,6 +110,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install wheel
           pip install setuptools_scm numpy
+
+      - name: Create package
+        run: |
+          cd packages
+          python create_package.py
+          cd python
 
       - name: Build source and wheel distributions
         if: github.ref == 'refs/heads/main'
