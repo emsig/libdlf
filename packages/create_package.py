@@ -10,6 +10,9 @@ pathlib.Path(abspath("python/libdlf")).mkdir(parents=True, exist_ok=True)
 shutil.copytree(abspath('../lib'), abspath('python/libdlf/lib'),
                 dirs_exist_ok=True)
 
+# We need to copy the git folder, so scm can create the correct version number
+shutil.copytree(abspath('../.git'), abspath('python/.git'), dirs_exist_ok=True)
+
 # Copy README and LICENSE
 shutil.copyfile('../README.md', 'python/README.md')
 shutil.copyfile('../LICENSE', 'python/LICENSE')
@@ -38,9 +41,9 @@ setup(
         "numpy",
     ],
     use_scm_version={
-        "root": "../../",
+        "root": ".",
         "relative_to": __file__,
-        "write_to": os.path.join("packages", "python", "libdlf", "version.py"),
+        "write_to": os.path.join("libdlf", "version.py"),
     },
     setup_requires=["setuptools_scm"],
 )
@@ -56,7 +59,9 @@ with open(abspath("python/setup.cfg"), "w") as fs:
 # Create MANIFEST.in
 with open(abspath("python/MANIFEST.in"), "w") as fm:
     fm.write("include libdlf/lib/filters.json\n")
-    fm.write("include libdlf/lib/*/*.txt")
+    fm.write("include libdlf/lib/*/*.txt\n")
+    fm.write("exclude MANIFEST.in\n")
+    fm.write("exclude setup.cfg\n")
 
 # Read json
 with open(abspath('python/libdlf/lib/filters.json')) as fj:
@@ -65,9 +70,18 @@ with open(abspath('python/libdlf/lib/filters.json')) as fj:
 # Create init file
 with open(abspath('python/libdlf/__init__.py'), 'w') as fi:
 
+    fi.write("from datetime import datetime\n")
+
     # Loop over transforms and add them
     for transform, flist in lib.items():
         fi.write(f"from libdlf import {transform}\n")
+
+    fi.write(
+        "try:\n"
+        "    from libdlf.version import version as __version__\n"
+        "except ImportError:\n"
+        "    __version__ = 'unknown-'+datetime.today().strftime('%Y%m%d')\n"
+    )
 
 
 # Loop over transforms
