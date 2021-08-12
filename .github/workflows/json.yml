@@ -23,6 +23,8 @@ jobs:
 
       - name: Install dependencies
         shell: bash
-        run: |
-          pip install pytest
-          pytest tests/test_json.py
+        run: pip install pytest
+
+      - name: Run test
+        shell: bash
+        run: pytest tests/test_json.py
