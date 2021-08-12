@@ -21,8 +21,8 @@ defaults:
 jobs:
   test:
 
-    name: ${{ matrix.case.os }}
-    runs-on: ${{ matrix.case.os }}-latest
+    name: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}-latest
 
     strategy:
       fail-fast: false
