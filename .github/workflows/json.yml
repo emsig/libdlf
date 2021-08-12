@@ -13,9 +13,6 @@ on:
 # Use bash by default in all jobs
 defaults:
   run:
-    # Using "-l {0}" is necessary for conda environments to be activated
-    # But this breaks on MacOS if using actions/setup-python:
-    # https://github.com/actions/setup-python/issues/132
     shell: bash
 
 jobs:
@@ -42,10 +39,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install dependencies
-        shell: bash -l {0}
         run: pip install pytest
 
-      # Currently ONLY tests if it can be installed, plus linting
-      - name: Flake8 with pytest
-        shell: bash -l {0}
+      - name: pytest the json
         run: pytest tests/test_json.py
