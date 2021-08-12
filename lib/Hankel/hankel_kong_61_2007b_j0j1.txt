@@ -18,7 +18,8 @@
 # in the three files YBASE61NEW.dat, J0K61NEW.dat, and J1K61NEW.dat.
 # Please consult the original source for more details.
 #
-# The appendix "b" after the year indicates that it corresponds to the NEW set.
+# The appendix "b" after the year indicates that it corresponds to the NEW
+# set of filter values.
 #
 #
 # Copyright 2007 Fannian Kong
