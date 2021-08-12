@@ -1,6 +1,5 @@
 name: json
 
-# Only build PRs, the main branch, and releases.
 on:
   pull_request:
   push:
@@ -10,36 +9,20 @@ on:
     types:
       - published
 
-# Use bash by default in all jobs
-defaults:
-  run:
-    shell: bash
-
 jobs:
-  test:
+  json:
 
-    name: ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}-latest
-
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu, macos, windows]
+    # Linux is sufficient for the json test. The individual packages should be
+    # checked for different OS's.
+    runs-on: ubuntu-latest
 
     steps:
 
-      # Cancel any previous run of the test job; [pin v0.8.0 (2021-02-13)]
-      - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@3d86a7cc43670094ac248017207be0295edbc31d
-        with:
-          access_token: ${{ github.token }}
-
-      # Checks-out your repository under $GITHUB_WORKSPACE
       - name: Checkout
         uses: actions/checkout@v2
 
       - name: Install dependencies
-        run: pip install pytest
-
-      - name: pytest the json
-        run: pytest tests/test_json.py
+        shell: bash
+        run: |
+          pip install pytest
+          pytest tests/test_json.py
