@@ -65,11 +65,11 @@ jobs:
 
 
       # Currently ONLY tests if it can be installed, plus linting
-      - name: Test with pytest
+      - name: Flake8 with pytest
         shell: bash -l {0}
         run: |
           cd packages
-          python create_package.py
+          python create_python.py
           pip install python/. --use-feature=in-tree-build
           cd python
           pytest --flake8
@@ -113,7 +113,7 @@ jobs:
       - name: Create package
         run: |
           cd packages
-          python create_package.py
+          python create_python.py
 
       - name: Replace naming scheme
         if: github.ref == 'refs/heads/main'

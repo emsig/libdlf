@@ -1,0 +1,30 @@
+name: json
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  release:
+    types:
+      - published
+
+jobs:
+  json:
+
+    # Linux is sufficient for the json test. The individual packages should be
+    # checked for different OS's.
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        shell: bash
+        run: pip install pytest
+
+      - name: Run test
+        shell: bash
+        run: pytest tests/test_json.py

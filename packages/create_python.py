@@ -91,6 +91,11 @@ for transform, flist in lib.items():
         ft.write("import os\n")
         ft.write("import numpy as np\n\n\n")
 
+        # Write __all__
+        ft.write("__all__ = [\n    '")
+        ft.write("',\n    '".join([filt['name'] for filt in flist]))
+        ft.write("',\n]\n\n")
+
         # Path of the library
         ft.write("_LIBPATH = os.path.abspath(os.path.dirname(__file__))\n")
 
