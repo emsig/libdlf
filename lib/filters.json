@@ -1,6 +1,33 @@
 {
   "hankel": [
     {
+      "name" : "kong_61_2007b",
+      "author": "Fannian Kong",
+      "year": "2007",
+      "appendix": "b",
+      "points": 61,
+      "values": "j0,j1",
+      "file": "lib/Hankel/hankel_kong_61_2007b_j0j1.txt"
+    },
+    {
+      "name" : "kong_121_2007",
+      "author": "Fannian Kong",
+      "year": "2007",
+      "appendix": "",
+      "points": 121,
+      "values": "j0,j1",
+      "file": "lib/Hankel/hankel_kong_121_2007_j0j1.txt"
+    },
+    {
+      "name" : "kong_241_2007",
+      "author": "Fannian Kong",
+      "year": "2007",
+      "appendix": "",
+      "points": 241,
+      "values": "j0,j1",
+      "file": "lib/Hankel/hankel_kong_241_2007_j0j1.txt"
+    },
+    {
       "name" : "key_101_2009",
       "author": "Kerry Key",
       "year": "2009",
