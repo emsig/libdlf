@@ -65,7 +65,7 @@ jobs:
 
 
       # Currently ONLY tests if it can be installed, plus linting
-      - name: Test with pytest
+      - name: Flake8 with pytest
         shell: bash -l {0}
         run: |
           cd packages
