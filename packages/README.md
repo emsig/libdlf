@@ -10,7 +10,7 @@ be built manually. Instructions for each language are given below.
 The python package is created by running
 
 ```bash
-python create_package.py
+python create_python.py
 ```
 
 The build requires `setuptools_scm`; the only dependency to use the package is
