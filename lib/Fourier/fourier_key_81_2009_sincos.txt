@@ -1,4 +1,4 @@
-# 101 point Fourier filter, Sine and Cosine
+# 81 point Fourier filter, Sine and Cosine
 # =========================================
 #
 # Designed and tested for controlled-source electromagnetic data.
