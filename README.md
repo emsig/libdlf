@@ -123,7 +123,7 @@ The convention for file-naming is given in the following, where the different
 parts are separated by underscores (all lowercase, file ending is `.txt`):
 
 1. Transform type. E.g. `hankel`.
-2. 3-6 characters of first author or first initials of authors. E.g., `wer`.
+2. 3-8 characters of first author or first initials of authors. E.g., `wer`.
 3. Number of points. E.g. `201`.
 4. Year. E.g. `2018`.  
    (This can be followed by an appendix, a lowercase letter if there are
