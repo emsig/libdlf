@@ -66,11 +66,14 @@ base, j0, j1 = libdlf.hankel.wer_201_2018()
 # TODO: Do actual transform with the filter.
 ```
 
-
 ### Julia
 
-ToDo
+```julia
+using LibDLF
+base, fcos, fsin = LibDLF.Fourier.key_201_2012()
 
+# TODO: Do actual transform with the filter.
+```
 
 ### Matlab
 
