@@ -4,7 +4,7 @@ on:
   pull_request:
   push:
     branches:
-      - dev
+      - dev_julia
   release:
     types:
       - published
