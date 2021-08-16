@@ -12,15 +12,17 @@ cp(abspath("../lib"),abspath("julia/LibDLF/src/lib"),force=true)
 cp("../README.md", "julia/README.md",force=true)
 cp("../LICENSE", "julia/LICENSE",force=true)
 
+# Get current version number in git:
+version = split(read(`git describe --tags`,String),"-")[1][2:end]
+
 # Create Project.toml
 iop = open(abspath("julia/LibDLF/Project.toml"), "w")
 println(iop,"name = \"LibDLF\"")
 println(iop,"uuid = \"f0c3f387-4ff6-435f-9d63-77e28b8d1347\"")
 println(iop,"authors = [\"The emsig community <info@emsig.xyz> \"]")
-println(iop,"version = \"0.0.0\"") #kwk debug: how to get version in github build?
+println(iop,"version = \"$version\"") #kwk debug: how to get version in github build?
 println(iop,"\n[deps]")
 println(iop,"DelimitedFiles = \"8bb1440f-4735-579b-a4ab-409b98df4dab\"")
-println(iop,"Memoization = \"6fafb56a-5788-4b4e-91ca-c0cea6611c73\"")
 println(iop,"\n[extras]")
 println(iop,"Test = \"8dfed614-e22c-5e08-85e1-65c5234f0b40\"")
 println(iop,"\n[targets]")
@@ -52,10 +54,12 @@ for type in filters.keys
 
     # Add used modules
     println(iot, "using DelimitedFiles")
-    println(iot, "using Memoization")
 
     # Add library path variable:
     println(iot, "\nlibpath = @__DIR__")
+
+    # Add cache:
+    println(iot, "\ncache = Dict() # local cache for any filters already loaded")
 
     # Add filter functions:
     for filt in filters[type]
@@ -118,13 +122,15 @@ for type in filters.keys
 
         end
 
-        # Print function contents
-        println(iot, "@memoize function $sname()")
+        println(iot, "function $sname()")
 
+        println(iot,"\tif !haskey(cache,\"$sname\") # read and add to cache")
         sfile  =  filt["file"]
-        println(iot,"\tsfile = joinpath(libpath,\"$sfile\")")
-        println(iot, "\tdat = readdlm(sfile,comments=true)")
-        println(iot, "\tbase, $vals = eachcol(dat)")
+        println(iot,"\t\tsfile = joinpath(libpath,\"$sfile\")")
+        println(iot, "\t\tdat = readdlm(sfile,comments=true)")
+        println(iot,"\t\tcache[\"$sname\"]= tuple([dat[:,c] for c in 1:size(dat,2)]...)")
+        println(iot, "\tend")
+        println(iot, "\treturn cache[\"$sname\"]")
         println(iot, "end")
 
         # Close file
