@@ -1,0 +1,51 @@
+name: julia-deploy
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  release:
+    types:
+      - published
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  # test:  
+  deploy:  
+    name: Deploy to package-julia   
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 100  
+      - name: Fetch git tags   
+        run: git fetch origin 'refs/tags/*:refs/tags/*'
+      - uses: julia-actions/setup-julia@v1
+        with:
+          version: '1.6'
+      - name: Install dependencies
+        run: julia -e 'import Pkg; Pkg.add("DataStructures"); Pkg.add("JSON")'           
+      - name: Create package
+        run: |
+          cd packages
+          julia create_julia.jl 
+      - name: Deploy to packages-julia branch
+        uses: s0/git-publish-subdir-action@develop
+        if: success()
+        env:
+          REPO: self
+          BRANCH: package-julia
+          FOLDER: packages/julia
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+ 
+
+ 
+        
+ 

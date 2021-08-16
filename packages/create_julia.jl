@@ -1,28 +1,34 @@
 using DataStructures
 import JSON
 
+pkgdir = "julia/LibDLF.jl/"
+
 # Create package directories
-mkpath("julia/LibDLF/src")
-mkpath("julia/LibDLF/test")
+mkpath(pkgdir * "src")
+mkpath(pkgdir * "test")
 
 # Copy library to Julia package
-cp(abspath("../lib"),abspath("julia/LibDLF/src/lib"),force=true)
+cp("../lib",pkgdir * "src/lib",force=true)
 
-# Copy README and LICENSE
-cp("../README.md", "julia/README.md",force=true)
-cp("../LICENSE", "julia/LICENSE",force=true)
+# Copy package license
+cp("LICENSE", pkgdir*"LICENSE" ,force=true)
 
-# Get current version number in git:
-version = split(read(`git describe --tags`,String),"-")[1][2:end]
+# Copy filter data file license
+cp("../LICENSE", pkgdir * "src/lib/LICENSE",force=true)
+
+# Get current version number in git
+version = chomp(split(read(`git describe --tags`, String), "-")[1][2:end])
 
 # Create Project.toml
-iop = open(abspath("julia/LibDLF/Project.toml"), "w")
+iop = open(abspath(pkgdir * "Project.toml"), "w")
 println(iop,"name = \"LibDLF\"")
 println(iop,"uuid = \"f0c3f387-4ff6-435f-9d63-77e28b8d1347\"")
 println(iop,"authors = [\"The emsig community <info@emsig.xyz> \"]")
-println(iop,"version = \"$version\"") #kwk debug: how to get version in github build?
+println(iop,"version = \"$version\"")
 println(iop,"\n[deps]")
 println(iop,"DelimitedFiles = \"8bb1440f-4735-579b-a4ab-409b98df4dab\"")
+println(iop,"\n[compat]")
+println(iop,"julia = \"1\"")
 println(iop,"\n[extras]")
 println(iop,"Test = \"8dfed614-e22c-5e08-85e1-65c5234f0b40\"")
 println(iop,"\n[targets]")
@@ -30,11 +36,11 @@ println(iop,"test = [\"Test\"]")
 close(iop)
 
 # Read in .json file listing all filters
-filters = JSON.parsefile(abspath("julia/LibDLF/src/lib/filters.json"),
+filters = JSON.parsefile(abspath(pkgdir * "src/lib/filters.json"),
                          dicttype=DataStructures.OrderedDict)
 
 # Create Julia module
-iol = open(abspath("julia/LibDLF/src/LibDLF.jl"), "w")
+iol = open(abspath(pkgdir * "src/LibDLF.jl"), "w")
 
 # Module name
 println(iol,"module LibDLF\n")
@@ -48,7 +54,7 @@ for type in filters.keys
     println(iol, "include(\"$stype.jl\")")
 
     # Create sub module file for filter type
-    iot = open(abspath("julia/LibDLF/src/$stype.jl"), "w")
+    iot = open(abspath(pkgdir * "src/$stype.jl"), "w")
 
     println(iot, "module $stype\n")
 
@@ -61,11 +67,11 @@ for type in filters.keys
     # Add cache:
     println(iot, "\ncache = Dict() # local cache for any filters already loaded")
 
-    # Add filter functions:
+    # Add filter functions
     for filt in filters[type]
 
-        # Get and write header as docstring:
-        iof = open(abspath("julia/LibDLF/src/" * filt["file"]), "r")
+        # Get and write header as docstring
+        iof = open(abspath(pkgdir * "src/" * filt["file"]), "r")
 
         # Title
         println(iot, "\n\"\"\"")
@@ -124,11 +130,11 @@ for type in filters.keys
 
         println(iot, "function $sname()")
 
-        println(iot,"\tif !haskey(cache,\"$sname\") # read and add to cache")
+        println(iot, "\tif !haskey(cache,\"$sname\") # read and add to cache")
         sfile  =  filt["file"]
-        println(iot,"\t\tsfile = joinpath(libpath,\"$sfile\")")
+        println(iot, "\t\tsfile = joinpath(libpath,\"$sfile\")")
         println(iot, "\t\tdat = readdlm(sfile,comments=true)")
-        println(iot,"\t\tcache[\"$sname\"]= tuple([dat[:,c] for c in 1:size(dat,2)]...)")
+        println(iot, "\t\tcache[\"$sname\"]= tuple([dat[:,c] for c in 1:size(dat,2)]...)")
         println(iot, "\tend")
         println(iot, "\treturn cache[\"$sname\"]")
         println(iot, "end")
@@ -138,17 +144,27 @@ for type in filters.keys
 
     end
 
-    # Close filter type sub module:
+    # Close filter type sub module
     println(iot, "\nend")
     close(iot)
 end
 
-# Close LibDLF module:
+# Close LibDLF module
 println(iol,"\nend")
 close(iol)
 
+
+# Create README
+iord = open(abspath(pkgdir*"README.md"), "w")
+println(iord,"\n# Julia package for LibDLF\n")
+println(iord,"This package is auto-generated. See
+[emsig/libdlf](https://github.com/emsig/libdlf) for installation and usage
+instructions.")
+
+close(iord)
+
 # Create testing routine
-ior = open(abspath("julia/LibDLF/test/runtests.jl"), "w")
+ior = open(abspath(pkgdir*"test/runtests.jl"), "w")
 println(ior,"using LibDLF")
 println(ior,"using Test\n")
 println(ior,"# insert code for @testset blocks and @test unit tests ")
