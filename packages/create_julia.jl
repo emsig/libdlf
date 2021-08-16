@@ -2,21 +2,21 @@ using DataStructures
 import JSON
 
 # Create package directories
-mkpath("julia/LibDLF/src")
-mkpath("julia/LibDLF/test")
+mkpath("julia/src")
+mkpath("julia/test")
 
 # Copy library to Julia package
-cp(abspath("../lib"),abspath("julia/LibDLF/src/lib"),force=true)
+cp(abspath("../lib"),abspath("julia/src/lib"),force=true)
 
 # Copy README and LICENSE
-cp("../README.md", "julia/LibDLF/README.md",force=true)
-cp("../LICENSE", "julia/LibDLF/LICENSE",force=true)
+cp("../README.md", "julia/README.md",force=true)
+cp("../LICENSE", "julia/LICENSE",force=true)
 
 # Get current version number in git:
 version = split(read(`git describe --tags`,String),"-")[1][2:end]
 
 # Create Project.toml
-iop = open(abspath("julia/LibDLF/Project.toml"), "w")
+iop = open(abspath("julia/Project.toml"), "w")
 println(iop,"name = \"LibDLF\"")
 println(iop,"uuid = \"f0c3f387-4ff6-435f-9d63-77e28b8d1347\"")
 println(iop,"authors = [\"The emsig community <info@emsig.xyz> \"]")
@@ -30,11 +30,11 @@ println(iop,"test = [\"Test\"]")
 close(iop)
 
 # Read in .json file listing all filters
-filters = JSON.parsefile(abspath("julia/LibDLF/src/lib/filters.json"),
+filters = JSON.parsefile(abspath("julia/src/lib/filters.json"),
                          dicttype=DataStructures.OrderedDict)
 
 # Create Julia module
-iol = open(abspath("julia/LibDLF/src/LibDLF.jl"), "w")
+iol = open(abspath("julia/src/LibDLF.jl"), "w")
 
 # Module name
 println(iol,"module LibDLF\n")
@@ -48,7 +48,7 @@ for type in filters.keys
     println(iol, "include(\"$stype.jl\")")
 
     # Create sub module file for filter type
-    iot = open(abspath("julia/LibDLF/src/$stype.jl"), "w")
+    iot = open(abspath("julia/src/$stype.jl"), "w")
 
     println(iot, "module $stype\n")
 
@@ -65,7 +65,7 @@ for type in filters.keys
     for filt in filters[type]
 
         # Get and write header as docstring:
-        iof = open(abspath("julia/LibDLF/src/" * filt["file"]), "r")
+        iof = open(abspath("julia/src/" * filt["file"]), "r")
 
         # Title
         println(iot, "\n\"\"\"")
@@ -148,7 +148,7 @@ println(iol,"\nend")
 close(iol)
 
 # Create testing routine
-ior = open(abspath("julia/LibDLF/test/runtests.jl"), "w")
+ior = open(abspath("julia/test/runtests.jl"), "w")
 println(ior,"using LibDLF")
 println(ior,"using Test\n")
 println(ior,"# insert code for @testset blocks and @test unit tests ")
