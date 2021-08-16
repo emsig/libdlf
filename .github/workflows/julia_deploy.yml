@@ -36,3 +36,14 @@ jobs:
         run: |
           cd packages
           julia create_julia.jl
+      - name: Deploy to packages-julia branch
+        
+      - name: Deploy to packages-julia branch
+        uses: s0/git-publish-subdir-action@develop
+        if: success()
+        env:
+          REPO: self
+          BRANCH: packages-julia
+          FOLDER: packages/julia
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
