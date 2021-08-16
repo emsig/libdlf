@@ -59,6 +59,7 @@ with open(abspath("python/setup.cfg"), "w") as fs:
 with open(abspath("python/MANIFEST.in"), "w") as fm:
     fm.write("include libdlf/lib/filters.json\n")
     fm.write("include libdlf/lib/*/*.txt\n")
+    fm.write("include LICENSE\n")
     fm.write("exclude MANIFEST.in\n")
     fm.write("exclude setup.cfg\n")
 
