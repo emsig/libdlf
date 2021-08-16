@@ -18,8 +18,7 @@ jobs:
   deploy:  
     name: Deploy to package-julia   
     runs-on: ubuntu-latest
-    if: github.repository_owner == 'emsig' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/'))
-​
+ 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -34,7 +33,4 @@ jobs:
       - name: Create package
         run: |
           cd packages
-          julia create_julia.jl     
-
- 
-​
+          julia create_julia.jl
