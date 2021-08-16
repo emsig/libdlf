@@ -1,0 +1,40 @@
+name: julia-deploy
+
+on:
+  pull_request:  # [DW] on pull requests
+  push:
+    branches:
+      - main     # [DW] on pushes to the main branch (e.g., when merging PR)
+  release:
+    types:
+      - published  # [DW] when releasing a tag
+​
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  # test:  
+  deploy:  
+    name: Deploy to package-julia   
+    runs-on: ubuntu-latest
+    if: github.repository_owner == 'emsig' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/'))
+​
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 100  
+          persist-credentials: false
+      - name: Fetch git tags   
+        run: git fetch origin 'refs/tags/*:refs/tags/*'
+      - uses: julia-actions/setup-julia@v1
+        with:
+          version: '1.6'
+      - name: Create package
+        run: |
+          cd packages
+          julia create_julia.jl     
+
+ 
+​
