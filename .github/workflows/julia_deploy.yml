@@ -41,7 +41,7 @@ jobs:
         if: success()
         env:
           REPO: self
-          BRANCH: packages-julia
-          FOLDER: packages/julia
+          BRANCH: package-julia
+          FOLDER: package/julia
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
