@@ -1,6 +1,15 @@
 {
   "hankel": [
     {
+      "name" : "anderson_801_1982",
+      "author": "Walter L. Anderson",
+      "year": "1982",
+      "appendix": "",
+      "points": 801,
+      "values": "j0,j1",
+      "file": "lib/Hankel/hankel_anderson_801_1982_j0j1.txt"
+    },
+    {
       "name" : "kong_61_2007b",
       "author": "Fannian N. Kong",
       "year": "2007",
