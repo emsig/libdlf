@@ -18,15 +18,9 @@ defaults:
 jobs:
   test:
 
-    name: ${{ matrix.os }} py${{ matrix.case.python-version }}
-    runs-on: ${{ matrix.os }}-latest
-
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu, macos, windows]  # Only Linux currently.
-        case:
-          - python-version: 3.8
+    name: build-test (Linux only)
+    runs-on: ubuntu-latest
+    python-version: 3.8
 
     steps:
 
