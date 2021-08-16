@@ -1,6 +1,5 @@
 name: linux-python
 
-# Only build PRs, the main branch, and releases.
 on:
   pull_request:
   push:
@@ -10,7 +9,6 @@ on:
     types:
       - published
 
-# Use bash by default in all jobs
 defaults:
   run:
     shell: bash
@@ -30,26 +28,12 @@ jobs:
 
     steps:
 
-      # Cancel any previous run of the test job; [pin v0.9.1 (2021-07-29)]
-      - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@a40b8845c0683271d9f53dfcb887a7e181d3918b
-        with:
-          access_token: ${{ github.token }}
-
-      # Checks-out your repository under $GITHUB_WORKSPACE
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          # Need to fetch more than the last commit so that setuptools_scm can
-          # create the correct version string. If the number of commits since
-          # the last release is greater than this, the version still be wrong.
-          # Increase if necessary.
           fetch-depth: 100
-          # The GitHub token is preserved by default but this job doesn't need
-          # to be able to push to GitHub.
           persist-credentials: false
 
-      # Need the tags so that setuptools_scm can form a valid version number
       - name: Fetch git tags
         run: git fetch origin 'refs/tags/*:refs/tags/*'
 
@@ -58,8 +42,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install setuptools_scm numpy pytest pytest-flake8
 
-      # Currently ONLY tests if it can be installed, plus linting
-      - name: Flake8 with pytest
+      - name: Create, install, lint and test
         run: |
           cd packages
           python create_python.py
@@ -75,20 +58,12 @@ jobs:
     if: github.repository_owner == 'emsig' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/'))
 
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          # Need to fetch more than the last commit so that setuptools_scm can
-          # create the correct version string. If the number of commits since
-          # the last release is greater than this, the version will still be
-          # wrong. Increase if necessary.
           fetch-depth: 100
-          # The GitHub token is preserved by default but this job doesn't need
-          # to be able to push to GitHub.
           persist-credentials: false
 
-      # Need the tags so that setuptools_scm can form a valid version number
       - name: Fetch git tags
         run: git fetch origin 'refs/tags/*:refs/tags/*'
 
@@ -128,8 +103,8 @@ jobs:
 
       - name: Publish to Test PyPI
         if: success()
-        # Hash corresponds to v1.4.1
-        uses: pypa/gh-action-pypi-publish@54b39fb9371c0b3a6f9f14bb8a67394defc7a806
+        # [pin v1.4.2 (2021-02-08)]
+        uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
         with:
           user: __token__
           password: ${{ secrets.TEST_PYPI_PASSWORD }}
@@ -142,8 +117,8 @@ jobs:
       - name: Publish to PyPI
         # Only for releases
         if: success() && github.event_name == 'release'
-        # Hash corresponds to v1.4.1
-        uses: pypa/gh-action-pypi-publish@54b39fb9371c0b3a6f9f14bb8a67394defc7a806
+        # [pin v1.4.2 (2021-02-08)]
+        uses: pypa/gh-action-pypi-publish@27b31702a0e7fc50959f5ad993c78deac1bdfc29
         with:
           user: __token__
           password: ${{ secrets.PYPI_PASSWORD }}
