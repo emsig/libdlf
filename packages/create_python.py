@@ -162,3 +162,94 @@ for transform, flist in lib.items():
             # Empty lines after function (except for last filter)
             if f_i < nr_filt-1:
                 ft.write("\n\n")
+
+
+# Write tests
+test_filters = r"""import libdlf
+import numpy as np
+
+
+# Anderson (1975): J0_01/J0_2; sin_1/cos_1; with a=1
+xt = np.array([1.0])
+
+
+def test_hankel():
+    # Analytical RHS
+    rhs_j0 = np.exp(-xt**2/4)/2
+    rhs_j1 = xt/4*np.exp(-xt**2/4)
+
+    # Loop over filters
+    for i, filt in enumerate(libdlf.hankel.__all__):
+
+        # Get filter
+        tfilt = getattr(libdlf.hankel, filt)
+
+        # Get return values
+        values = tfilt.__doc__.split('-------')[1]
+        values = values.split('\n')[1].split(':')[0].strip()
+
+        # Load filter
+        if len(values.split(',')) == 3:
+            base, j0, j1 = tfilt()
+        elif 'j0' in values:
+            base, j0 = tfilt()
+        elif 'j1' in values:
+            base, j1 = tfilt()
+        else:
+            assert 1 == 0
+
+        # Required wavenumbers
+        λ = base/xt[:, None]
+
+        # Compute values
+        lhs_j0 = λ*np.exp(-λ**2)
+        lhs_j1 = λ**2*np.exp(-λ**2)
+
+        # Check
+        if 'j0' in values:
+            assert abs((rhs_j0 - np.dot(lhs_j0, j0)/xt) / rhs_j0) < 1e-4
+        if 'j1' in values:
+            assert abs((rhs_j1 - np.dot(lhs_j1, j1)/xt) / rhs_j1) < 1e-4
+
+
+def test_fourier():
+    # Analytical RHS
+    rhs_sin = np.sqrt(np.pi)*xt*np.exp(-xt**2/4)/4
+    rhs_cos = np.sqrt(np.pi)*np.exp(-xt**2/4)/2
+
+    # Loop over filters
+    for i, filt in enumerate(libdlf.fourier.__all__):
+
+        # Get filter
+        tfilt = getattr(libdlf.fourier, filt)
+
+        # Get return values
+        values = tfilt.__doc__.split('-------')[1]
+        values = values.split('\n')[1].split(':')[0].strip()
+
+        # Load filter
+        if len(values.split(',')) == 3:
+            base, sin, cos = tfilt()
+        elif 'sin' in values:
+            base, sin = tfilt()
+        elif 'cos' in values:
+            base, cos = tfilt()
+        else:
+            assert 1 == 0
+
+        # Required frequencies
+        f = base/xt[:, None]
+
+        # Compute values
+        lhs_sin = f*np.exp(-f**2)
+        lhs_cos = np.exp(-f**2)
+
+        # Check
+        if 'sin' in values:
+            assert abs((rhs_sin - np.dot(lhs_sin, sin)/xt) / rhs_sin) < 1e-4
+        if 'cos' in values:
+            assert abs((rhs_cos - np.dot(lhs_cos, cos)/xt) / rhs_cos) < 1e-4
+"""
+pathlib.Path(abspath("python/tests")).mkdir(exist_ok=True)
+with open(abspath("python/tests/test_filters.py"), "w") as fs:
+    fs.write(test_filters)
