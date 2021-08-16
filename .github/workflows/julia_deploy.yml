@@ -30,6 +30,8 @@ jobs:
       - uses: julia-actions/setup-julia@v1
         with:
           version: '1.6'
+      - name: Install dependencies
+        run: julia -e 'import Pkg; Pkg.add("DelimitedFiles"); Pkg.add("JSON")'           
       - name: Create package
         run: |
           cd packages
