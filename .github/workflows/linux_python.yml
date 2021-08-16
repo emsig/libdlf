@@ -54,8 +54,9 @@ jobs:
         run: git fetch origin 'refs/tags/*:refs/tags/*'
 
       - name: Install dependencies
-        run: pip install setuptools_scm numpy pytest pytest-flake8
-
+        run: |
+          python -m pip install --upgrade pip
+          pip install setuptools_scm numpy pytest pytest-flake8
 
       # Currently ONLY tests if it can be installed, plus linting
       - name: Flake8 with pytest
