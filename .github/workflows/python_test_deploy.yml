@@ -22,7 +22,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu, ]  # Only Linux for _creation_]
+        os: [ubuntu, macos, windows]
         case:
           - python-version: 3.8
 
@@ -37,10 +37,15 @@ jobs:
       - name: Fetch git tags
         run: git fetch origin 'refs/tags/*:refs/tags/*'
 
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.case.python-version }}
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install setuptools_scm numpy pytest pytest-flake8
+          pip install numpy pytest pytest-flake8
 
       - name: Create, install, lint and test
         run: |
@@ -70,26 +75,20 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v2
         with:
-          python-version: "3.8"
+          python-version: ${{ matrix.case.python-version }}
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install wheel setuptools_scm numpy
+          pip install wheel numpy
 
       - name: Create package
         run: |
           cd packages
           python create_python.py
-
-      - name: Replace naming scheme
-        if: github.ref == 'refs/heads/main'
-        run: |
-          # Change setuptools-scm local_scheme to "no-local-version" so the
-          # local part of the version isn't included, making the version string
-          # compatible with Test PyPI.
-          sed --in-place 's/"root"/"local_scheme":"no-local-version","root"/g' packages/python/setup.py
-          cat packages/python/setup.py
+          echo ""
+          echo "Version:"
+          echo python python/setup.py --version
 
       - name: Build source and wheel distributions
         run: |

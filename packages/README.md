@@ -13,13 +13,12 @@ The python package is created by running
 python create_python.py
 ```
 
-The build requires `setuptools_scm`; the only dependency to use the package is
-`numpy`.
+The only dependency to use the package is `numpy`.
 
 If you want to install the package created in this manner, run
 
 ```bash
-pip install  python/. --use-feature=in-tree-build
+pip install python/. --use-feature=in-tree-build
 ```
 
 To clear it, run

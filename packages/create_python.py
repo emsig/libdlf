@@ -1,7 +1,17 @@
 import json
 import shutil
 import pathlib
+import subprocess
 from os.path import abspath
+
+# Get git version
+version = subprocess.check_output(
+    ['git', 'describe', '--tags'], stderr=subprocess.DEVNULL
+).strip().decode('utf-8').split('-')
+if len(version) > 1 and version[1]:
+    version = version[0][1:] + '.dev' + version[1]
+else:
+    version = version[0][1:]
 
 # Create package directory
 pathlib.Path(abspath("python/libdlf")).mkdir(parents=True, exist_ok=True)
@@ -15,8 +25,7 @@ shutil.copyfile('../README.md', 'python/README.md')
 shutil.copyfile('../LICENSE', 'python/LICENSE')
 
 # Create setup.py
-setup = """# -*- coding: utf-8 -*-
-import os
+setup = f"""# -*- coding: utf-8 -*-
 from setuptools import setup
 
 # Longer description
@@ -26,6 +35,7 @@ readme = ('Library for Digital Linear Filters (DLF) as used, for instance, '
 
 setup(
     name="libdlf",
+    version="{version}",
     description="Library for Digital Linear Filters (DLF)",
     long_description=readme,
     author="The emsig community",
@@ -34,15 +44,7 @@ setup(
     license="CC-BY-4.0",
     packages=["libdlf"],
     include_package_data=True,
-    install_requires=[
-        "numpy",
-    ],
-    use_scm_version={
-        "root": "../../",
-        "relative_to": __file__,
-        "write_to": os.path.join("packages", "python", "libdlf", "version.py"),
-    },
-    setup_requires=["setuptools_scm"],
+    install_requires=["numpy"],
 )
 """
 with open(abspath("python/setup.py"), "w") as fs:
@@ -64,21 +66,15 @@ with open(abspath("python/MANIFEST.in"), "w") as fm:
 with open(abspath('python/libdlf/lib/filters.json')) as fj:
     lib = json.load(fj)
 
+
 # Create init file
 with open(abspath('python/libdlf/__init__.py'), 'w') as fi:
-
-    fi.write("from datetime import datetime\n")
 
     # Loop over transforms and add them
     for transform, flist in lib.items():
         fi.write(f"from libdlf import {transform}\n")
 
-    fi.write(
-        "try:\n"
-        "    from libdlf.version import version as __version__\n"
-        "except ImportError:\n"
-        "    __version__ = 'unknown-'+datetime.today().strftime('%Y%m%d')\n"
-    )
+    fi.write(f"\n__version__ = '{version}'\n")
 
 
 # Loop over transforms
@@ -199,11 +195,11 @@ def test_hankel():
             assert 1 == 0
 
         # Required wavenumbers
-        λ = base/xt[:, None]
+        lambd = base/xt[:, None]
 
         # Compute values
-        lhs_j0 = λ*np.exp(-λ**2)
-        lhs_j1 = λ**2*np.exp(-λ**2)
+        lhs_j0 = lambd*np.exp(-lambd**2)
+        lhs_j1 = lambd**2*np.exp(-lambd**2)
 
         # Check
         if 'j0' in values:
@@ -238,11 +234,11 @@ def test_fourier():
             assert 1 == 0
 
         # Required frequencies
-        f = base/xt[:, None]
+        freq = base/xt[:, None]
 
         # Compute values
-        lhs_sin = f*np.exp(-f**2)
-        lhs_cos = np.exp(-f**2)
+        lhs_sin = freq*np.exp(-freq**2)
+        lhs_cos = np.exp(-freq**2)
 
         # Check
         if 'sin' in values:
