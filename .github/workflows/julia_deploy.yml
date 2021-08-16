@@ -35,7 +35,7 @@ jobs:
       - name: Create package
         run: |
           cd packages
-          julia create_julia.jl
+          julia create_julia.jl 
       - name: Deploy to packages-julia branch
         uses: s0/git-publish-subdir-action@develop
         if: success()
