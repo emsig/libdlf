@@ -1,14 +1,14 @@
 name: julia-deploy
 
 on:
-  pull_request:  # [DW] on pull requests
+  pull_request:
   push:
     branches:
-      - main     # [DW] on pushes to the main branch (e.g., when merging PR)
+      - dev
   release:
     types:
-      - published  # [DW] when releasing a tag
-​
+      - published
+
 defaults:
   run:
     shell: bash
