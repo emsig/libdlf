@@ -13,7 +13,7 @@ cp("../README.md", "julia/README.md",force=true)
 cp("../LICENSE", "julia/LICENSE",force=true)
 
 # Get current version number in git:
-version = split(read(`git describe --tags`,String),"-",limit=0)[1][2:end]
+version = split(read(`git describe --tags`,String),"-")[1][2:end]
 
 # Create Project.toml
 iop = open(abspath("julia/LibDLF/Project.toml"), "w")
