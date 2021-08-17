@@ -32,7 +32,7 @@ rm -rf python/
 
 # Julia
 
-The Julia package `LibDLF` is created by running
+The Julia package `DLFlib` is created by running
 
 ```bash
 julia create_julia.jl
@@ -40,6 +40,9 @@ julia create_julia.jl
 
 The build requires packages `DataStructures` and `JSON`.
 
-Packages `DelimitedFiles` and `Memoization` are required to use the `LibDLF` package.
+Packages `DelimitedFiles` is required to use the `DLFlib`
+package. A github action deploys `DLFlib` to its own repo
+[DLFlib](https://github.com/emsig/DLFlib.jl)
+and triggers any library version updates to be registered in Julia's General Registry.
 
 (All commands are meant to be run within the `packages` directory.)
