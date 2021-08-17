@@ -45,5 +45,4 @@ jobs:
           FOLDER: packages/julia
           MESSAGE: "@JuliaRegistrator register branch=package-julia"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_PRIVATE_KEY }}
           
