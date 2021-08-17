@@ -36,14 +36,16 @@ jobs:
         run: |
           cd packages
           julia create_julia.jl 
-      - name: Deploy to packages-julia branch
-        uses: s0/git-publish-subdir-action@develop
+      - name: Push to DLFlib.jl repo
+        uses: cpina/github-action-push-to-another-repository@main
         if: success()
         env:
-          REPO: git@github.com:emsig/DLFlib.jl.git
-          BRANCH: main
-          FOLDER: /
-          MESSAGE: "auto deployed update from https://github.com/emsig/libdlf"
-          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_PRIVATE_KEY }}
-
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-directory: 'packages/julia'
+          destination-github-username: 'emsig'
+          destination-repository-name: 'DLFlib.jl'
+          user-email: kkey@ldeo.columbia.edu
+          target-branch: main
+          
           
