@@ -42,6 +42,7 @@ jobs:
         env:
          REPO: git@github.com:emsig/DLFlib.jl.git
          BRANCH: main
+         FOLDER: packages/julia
          MESSAGE: "auto deployed update from https://github.com/emsig/libdlf"
          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_PRIVATE_KEY }}
 
