@@ -28,3 +28,18 @@ rm -rf python/
 ```
 
 (All commands are meant to be run within the `packages` directory.)
+
+
+# Julia
+
+The Julia package `LibDLF` is created by running
+
+```bash
+julia create_julia.jl
+```
+
+The build requires packages `DataStructures` and `JSON`.
+
+Packages `DelimitedFiles` and `Memoization` are required to use the `LibDLF` package.
+
+(All commands are meant to be run within the `packages` directory.)
