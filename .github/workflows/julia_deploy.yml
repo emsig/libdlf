@@ -40,9 +40,9 @@ jobs:
         uses: s0/git-publish-subdir-action@develop
         if: success()
         env:
-          REPO: self
-          BRANCH: package-julia
-          FOLDER: packages/julia
-          MESSAGE: "@JuliaRegistrator register branch=package-julia"
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: https://github.com/emsig/DLFlib.jl
+          BRANCH: main
+          MESSAGE: "auto deployed update from https://github.com/emsig/libdlf"
+          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_PRIVATE_KEY }}
+
           
