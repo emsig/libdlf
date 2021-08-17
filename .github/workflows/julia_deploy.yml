@@ -40,7 +40,7 @@ jobs:
         uses: s0/git-publish-subdir-action@develop
         if: success()
         env:
-         REPO: https://github.com/emsig/DLFlib.jl
+         REPO: git@github.com:emsig/DLFlib.jl.git
          BRANCH: main
          MESSAGE: "auto deployed update from https://github.com/emsig/libdlf"
          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_PRIVATE_KEY }}
