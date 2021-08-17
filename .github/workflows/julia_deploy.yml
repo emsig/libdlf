@@ -43,6 +43,6 @@ jobs:
           REPO: self
           BRANCH: package-julia
           FOLDER: packages/julia
-          MESSAGE: "@JuliaRegistrator register"
+          MESSAGE: "@JuliaRegistrator register branch=package-julia"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
