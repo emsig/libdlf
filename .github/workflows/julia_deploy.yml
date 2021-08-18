@@ -37,7 +37,7 @@ jobs:
           cd packages
           julia create_julia.jl 
       - name: Push generate Julia package to DLFlib.jl repo
-        uses: nkoppel/push-files-to-another-repository@1.1.0
+        uses: nkoppel/push-files-to-another-repository@master
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
