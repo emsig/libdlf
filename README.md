@@ -21,7 +21,7 @@ for electromagnetic modelling.
   - [File format](#file-format)
   - [Structure](#structure)
   - [json](#json)
-
+- [License](#license)
 
 ## Digital Linear Filters
 
@@ -68,21 +68,21 @@ base, j0, j1 = libdlf.hankel.wer_201_2018()
 
 ### Julia
 
-You can install `DLFlib` for Julia using:
+You can install `LibDLF` for Julia using:
 ```julia
 import Pkg
-Pkg.add("DLFlib")
+Pkg.add("LibDLF")
 ```
 or
 ```julia
-pkg> add DLFlib
+pkg> add LibDLF
 ```
 The package is structured into transform types with each filter function nested beneath its type. Each filter returns its base
 and corresponding values as arrays:
 
 ```julia
-using DLFlib
-base, fcos, fsin = DLFlib.Fourier.key_201_2012()
+using LibDLF
+base, fcos, fsin = LibDLF.Fourier.key_201_2012()
 
 # TODO: Do actual transform with the filter.
 ```
@@ -227,3 +227,12 @@ then added as an array. Each filter has exactly the following entries:
 comma-separated list. The file is the relative path to the corresponding
 filter, starting at `lib/`. Appendix will be an empty string, `""`, in most
 cases (see above under *File naming*).
+
+
+# License
+
+This work is licensed under a CC BY 4.0 license.
+<http://creativecommons.org/licenses/by/4.0/>.
+
+Note that the language-specific packages (e.g. Python and Julia) are licensed
+under BSD-3 while the filter values remain CC-BY-4.0.

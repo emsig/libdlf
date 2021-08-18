@@ -24,7 +24,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 100  
-          persist-credentials: false
       - name: Fetch git tags   
         run: git fetch origin 'refs/tags/*:refs/tags/*'
       - uses: julia-actions/setup-julia@v1
@@ -36,14 +35,13 @@ jobs:
         run: |
           cd packages
           julia create_julia.jl 
-      - name: Push generate Julia package to DLFlib.jl repo
-        uses: nkoppel/push-files-to-another-repository@master
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      - name: Commit built Julia package files for LibDLF.jl to repo
+        uses: EndBug/add-and-commit@v7
         with:
-          source-files: 'packages/julia/*'
-          destination-username: 'emsig'
-          destination-repository: 'DLFlib.jl'
-          destination-branch: 'main'
-          commit-email: 'kkey@ldeo.columbia.du'
+          default_author: github_actions
+
+ 
+
+ 
+        
  
