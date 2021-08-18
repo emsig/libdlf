@@ -37,13 +37,13 @@ jobs:
           cd packages
           julia create_julia.jl 
       - name: Push generate Julia package to DLFlib.jl repo
-        uses: nkoppel/push-files-to-another-repository@master
-        env:
-          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        uses: EndBug/add-and-commit@v7 # You can change this to use a specific version
         with:
-          source-files: 'packages/julia/*'
-          destination-username: 'emsig'
-          destination-repository: 'DLFlib.jl'
-          destination-branch: 'main'
-          commit-email: 'kkey@ldeo.columbia.du'
+          # The arguments for the `git add` command (see the paragraph below for more info)
+          # Default: '.'
+          add: 'packages/julia'
+          default_author: github_actor
+          message: 'auto build of LibDLF.jl'
+ 
+        
  
