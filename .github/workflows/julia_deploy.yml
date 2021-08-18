@@ -41,6 +41,9 @@ jobs:
         with:
           add: 'packages/julia'
           message: 'auto build of LibDLF.jl'
+          author_name: Kerry Key
+          author_email: kkey@ldeo.columbia.edu
+
 
           
           
