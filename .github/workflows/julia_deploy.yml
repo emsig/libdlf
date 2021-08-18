@@ -24,7 +24,6 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 100  
-          persist-credentials: false
       - name: Fetch git tags   
         run: git fetch origin 'refs/tags/*:refs/tags/*'
       - uses: julia-actions/setup-julia@v1
