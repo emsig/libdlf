@@ -37,14 +37,12 @@ jobs:
           cd packages
           julia create_julia.jl 
       - name: Commit built Julia package files for DLFlib.jl to repo
-        uses: EndBug/add-and-commit@v7
+        uses: ad-m/github-push-action@master
         with:
-          add: 'packages/julia'
-          message: 'auto build of LibDLF.jl'
-          default_author: github_actions
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
 
 
-          
           
  
 
