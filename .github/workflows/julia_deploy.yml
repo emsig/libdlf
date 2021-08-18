@@ -41,7 +41,7 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
-          source-files: 'packages/julia/'
+          source-files: 'packages/julia/*'
           destination-username: 'emsig'
           destination-repository: 'DLFlib.jl'
           destination-branch: 'main'
