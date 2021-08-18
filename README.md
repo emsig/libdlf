@@ -68,21 +68,21 @@ base, j0, j1 = libdlf.hankel.wer_201_2018()
 
 ### Julia
 
-You can install `LibDLF` for Julia using:
+You can install `DLFlib` for Julia using:
 ```julia
 import Pkg
-Pkg.add("LibDLF")
+Pkg.add("DLFlib")
 ```
 or
 ```julia
-pkg> add LibDLF
+pkg> add DLFlib
 ```
 The package is structured into transform types with each filter function nested beneath its type. Each filter returns its base
 and corresponding values as arrays:
 
 ```julia
-using LibDLF
-base, fcos, fsin = LibDLF.Fourier.key_201_2012()
+using DLFlib
+base, fcos, fsin = DLFlib.Fourier.key_201_2012()
 
 # TODO: Do actual transform with the filter.
 ```

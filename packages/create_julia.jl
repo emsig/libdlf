@@ -8,21 +8,22 @@ mkpath("julia/test")
 # Copy library to Julia package
 cp(abspath("../lib"),abspath("julia/src/lib"),force=true)
 
-# Copy README and LICENSE
+# Copy README
 cp("../README.md", "julia/README.md",force=true)
-cp("../LICENSE", "julia/LICENSE",force=true)
 
 # Get current version number in git:
 version = chomp(split(read(`git describe --tags`,String),"-")[1][2:end])
 
 # Create Project.toml
 iop = open(abspath("julia/Project.toml"), "w")
-println(iop,"name = \"LibDLF\"")
+println(iop,"name = \"DLFlib\"")
 println(iop,"uuid = \"f0c3f387-4ff6-435f-9d63-77e28b8d1347\"")
 println(iop,"authors = [\"The emsig community <info@emsig.xyz> \"]")
 println(iop,"version = \"$version\"") #kwk debug: how to get version in github build?
 println(iop,"\n[deps]")
 println(iop,"DelimitedFiles = \"8bb1440f-4735-579b-a4ab-409b98df4dab\"")
+println(iop,"\n[compat]")
+println(iop,"julia = \"1\"")
 println(iop,"\n[extras]")
 println(iop,"Test = \"8dfed614-e22c-5e08-85e1-65c5234f0b40\"")
 println(iop,"\n[targets]")
@@ -34,12 +35,12 @@ filters = JSON.parsefile(abspath("julia/src/lib/filters.json"),
                          dicttype=DataStructures.OrderedDict)
 
 # Create Julia module
-iol = open(abspath("julia/src/LibDLF.jl"), "w")
+iol = open(abspath("julia/src/DLFlib.jl"), "w")
 
 # Module name
-println(iol,"module LibDLF\n")
+println(iol,"module DLFlib\n")
 
-# Create LibDLF.jl files
+# Create DLFlib.jl files
 for type in filters.keys
 
     stype = titlecase(type)
@@ -105,7 +106,7 @@ for type in filters.keys
                 # Example
                 println(iot, "# Example\n")
                 println(iot, "```julia")
-                println(iot, "base, $vals = LibDLF.$stype.$sname()")
+                println(iot, "base, $vals = DLFlib.$stype.$sname()")
                 println(iot, "```")
 
                 # Finish header

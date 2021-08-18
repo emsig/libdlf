@@ -36,13 +36,14 @@ jobs:
         run: |
           cd packages
           julia create_julia.jl 
-      - name: Deploy to packages-julia branch
-        uses: s0/git-publish-subdir-action@develop
-        if: success()
+      - name: Push generate Julia package to DLFlib.jl repo
+        uses: nkoppel/push-files-to-another-repository@master
         env:
-          REPO: self
-          BRANCH: package-julia
-          FOLDER: packages/julia
-          MESSAGE: "@JuliaRegistrator register branch=package-julia"
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
+          API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+        with:
+          source-files: 'packages/julia/*'
+          destination-username: 'emsig'
+          destination-repository: 'DLFlib.jl'
+          destination-branch: 'main'
+          commit-email: 'kkey@ldeo.columbia.du'
+ 
