@@ -42,7 +42,10 @@ jobs:
           add: 'packages/julia'
           default_author: github_actor
           message: 'auto build of LibDLF.jl'
-          author_name: esmig
+          author_name: kerrykey
+          author_email: kkey@ldeo.columbia.edu
+          
+          
  
 
  
