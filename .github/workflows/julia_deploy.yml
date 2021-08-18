@@ -36,13 +36,16 @@ jobs:
         run: |
           cd packages
           julia create_julia.jl 
-      - name: Commit built Julia package files for DLFlib.jl to repo
-        uses: ad-m/github-push-action@master
+      - name: Commit built Julia package files for LibDLF.jl to repo
+        uses: EndBug/add-and-commit@v7
+        with:
+          message: 'adding GHA built Julia package LibDLF.jl'
+          add: 'packages/julia'
+          push: false
+      - uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
-
-
           
  
 
