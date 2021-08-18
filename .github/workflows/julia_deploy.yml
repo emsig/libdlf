@@ -40,10 +40,8 @@ jobs:
         uses: EndBug/add-and-commit@v2 # You can change this to use a specific version
         with:
           add: 'packages/julia'
-          default_author: github_actor
           message: 'auto build of LibDLF.jl'
-          author_name: kerrykey
-          author_email: kkey@ldeo.columbia.edu
+
           
           
  
