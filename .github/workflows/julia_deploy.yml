@@ -43,7 +43,7 @@ jobs:
         with:
           source-files: 'packages/julia/'
           destination-username: 'emsig'
-          destination-repository: 'github.com/emsig/DLFlib.jl.git'
+          destination-repository: 'DLFlib.jl'
           destination-branch: 'main'
           commit-email: 'kkey@ldeo.columbia.du'
  
