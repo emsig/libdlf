@@ -46,6 +46,4 @@ jobs:
           destination-repository: 'github.com/emsig/DLFlib.jl.git'
           destination-branch: 'main'
           commit-email: 'kkey@ldeo.columbia.du'
-          
-          https://github.com/emsig/DLFlib.jl.git
-
+ 
