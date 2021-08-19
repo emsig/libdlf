@@ -2,7 +2,7 @@ name: julia-register
 on:
   push:
     branches:
-      - package_julia
+      - package-julia
 
 defaults:
   run:
