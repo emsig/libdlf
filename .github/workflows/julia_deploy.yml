@@ -35,10 +35,14 @@ jobs:
         run: |
           cd packages
           julia create_julia.jl 
-      - name: Commit built Julia package files for LibDLF.jl to repo
-        uses: EndBug/add-and-commit@v7
-        with:
-          default_author: github_actions
+      - name: Deploy to packages-julia branch
+        uses: s0/git-publish-subdir-action@develop
+        if: success()
+        env:
+          REPO: self
+          BRANCH: package-julia
+          FOLDER: packages/julia
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
  
 
