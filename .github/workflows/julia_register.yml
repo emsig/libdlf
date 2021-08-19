@@ -1,0 +1,28 @@
+name: julia-register
+on:
+  push:
+    branches:
+      - package_julia
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+ 
+  register:  
+    name: Register   
+    runs-on: ubuntu-latest
+ 
+    steps:
+    - name: Create commit comment
+        uses: peter-evans/commit-comment@v1
+        with:
+          body: |
+            test comment
+
+ 
+
+ 
+        
+ 
