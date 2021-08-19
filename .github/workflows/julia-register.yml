@@ -17,5 +17,5 @@ jobs:
       uses: peter-evans/commit-comment@v1
       with:
         body: |
-          test comment
+          @JuliaRegistrator register subdir=LibDLF.jl
  
