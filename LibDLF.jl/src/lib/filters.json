@@ -1,0 +1,168 @@
+{
+  "hankel": [
+    {
+      "name" : "anderson_801_1982",
+      "author": "Walter L. Anderson",
+      "year": "1982",
+      "appendix": "",
+      "points": 801,
+      "values": "j0,j1",
+      "file": "lib/Hankel/hankel_anderson_801_1982_j0j1.txt"
+    },
+    {
+      "name" : "kong_61_2007b",
+      "author": "Fannian N. Kong",
+      "year": "2007",
+      "appendix": "b",
+      "points": 61,
+      "values": "j0,j1",
+      "file": "lib/Hankel/hankel_kong_61_2007b_j0j1.txt"
+    },
+    {
+      "name" : "kong_121_2007",
+      "author": "Fannian N. Kong",
+      "year": "2007",
+      "appendix": "",
+      "points": 121,
+      "values": "j0,j1",
+      "file": "lib/Hankel/hankel_kong_121_2007_j0j1.txt"
+    },
+    {
+      "name" : "kong_241_2007",
+      "author": "Fannian N. Kong",
+      "year": "2007",
+      "appendix": "",
+      "points": 241,
+      "values": "j0,j1",
+      "file": "lib/Hankel/hankel_kong_241_2007_j0j1.txt"
+    },
+    {
+      "name" : "key_101_2009",
+      "author": "Kerry Key",
+      "year": "2009",
+      "appendix": "",
+      "points": 101,
+      "values": "j0,j1",
+      "file": "lib/Hankel/hankel_key_101_2009_j0j1.txt"
+    },
+    {
+      "name" : "key_201_2009",
+      "author": "Kerry Key",
+      "year": "2009",
+      "appendix": "",
+      "points": 201,
+      "values": "j0,j1",
+      "file": "lib/Hankel/hankel_key_201_2009_j0j1.txt"
+    },
+    {
+      "name" : "key_401_2009",
+      "author": "Kerry Key",
+      "year": "2009",
+      "appendix": "",
+      "points": 401,
+      "values": "j0,j1",
+      "file": "lib/Hankel/hankel_key_401_2009_j0j1.txt"
+    },
+    {
+      "name" : "key_51_2012",
+      "author": "Kerry Key",
+      "year": "2012",
+      "appendix": "",
+      "points": 51,
+      "values": "j0,j1",
+      "file": "lib/Hankel/hankel_key_51_2012_j0j1.txt"
+    },
+    {
+      "name" : "key_101_2012",
+      "author": "Kerry Key",
+      "year": "2012",
+      "appendix": "",
+      "points": 101,
+      "values": "j0,j1",
+      "file": "lib/Hankel/hankel_key_101_2012_j0j1.txt"
+    },
+    {
+      "name" : "key_201_2012",
+      "author": "Kerry Key",
+      "year": "2012",
+      "appendix": "",
+      "points": 201,
+      "values": "j0,j1",
+      "file": "lib/Hankel/hankel_key_201_2012_j0j1.txt"
+    },
+    {
+      "name" : "wer_201_2018",
+      "author": "Dieter Werthmüller",
+      "year": "2018",
+      "appendix": "",
+      "points": 201,
+      "values": "j0,j1",
+      "file": "lib/Hankel/hankel_wer_201_2018_j0j1.txt"
+    },
+    {
+      "name" : "wer_2001_2018",
+      "author": "Dieter Werthmüller",
+      "year": "2018",
+      "appendix": "",
+      "points": 2001,
+      "values": "j0,j1",
+      "file": "lib/Hankel/hankel_wer_2001_2018_j0j1.txt"
+    }
+  ],
+  "fourier": [
+    {
+      "name" : "key_81_2009",
+      "author": "Kerry Key",
+      "year": "2009",
+      "appendix": "",
+      "points": 81,
+      "values": "sin,cos",
+      "file": "lib/Fourier/fourier_key_81_2009_sincos.txt"
+    },
+    {
+      "name" : "key_241_2009",
+      "author": "Kerry Key",
+      "year": "2009",
+      "appendix": "",
+      "points": 241,
+      "values": "sin,cos",
+      "file": "lib/Fourier/fourier_key_241_2009_sincos.txt"
+    },
+    {
+      "name" : "key_601_2009",
+      "author": "Kerry Key",
+      "year": "2009",
+      "appendix": "",
+      "points": 601,
+      "values": "sin,cos",
+      "file": "lib/Fourier/fourier_key_601_2009_sincos.txt"
+    },
+    {
+      "name" : "key_101_2012",
+      "author": "Kerry Key",
+      "year": "2012",
+      "appendix": "",
+      "points": 101,
+      "values": "sin,cos",
+      "file": "lib/Fourier/fourier_key_101_2012_sincos.txt"
+    },
+    {
+      "name" : "key_201_2012",
+      "author": "Kerry Key",
+      "year": "2012",
+      "appendix": "",
+      "points": 201,
+      "values": "sin,cos",
+      "file": "lib/Fourier/fourier_key_201_2012_sincos.txt"
+    },
+    {
+      "name" : "grayver_50_2021",
+      "author": "Alexander V. Grayver",
+      "year": "2021",
+      "appendix": "",
+      "points": 50,
+      "values": "sin",
+      "file": "lib/Fourier/fourier_grayver_50_2021_sin.txt"
+    }
+  ]
+}
