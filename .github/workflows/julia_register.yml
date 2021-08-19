@@ -1,8 +1,7 @@
 name: julia-register
 on:
-  push:
-    branches:
-      - package-julia
+  release:
+    types: [published]
 
 defaults:
   run:
