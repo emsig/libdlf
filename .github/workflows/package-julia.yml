@@ -35,7 +35,7 @@ jobs:
         run: |
           cd packages
           julia create_julia.jl 
-      - name: run tests:    
+      - name: run tests 
         run: |
           cd julia/LibDLF.jl     
       #- uses: julia-actions/julia-buildpkg@v1
