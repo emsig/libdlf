@@ -39,7 +39,7 @@ julia create_julia.jl
 
 The build requires packages `DataStructures` and `JSON`.
 
-A github action registers `LibDLF` in Julia's General Registry.
+A github action deploys `LibDLF` to branch `package-julia`.
 
 Package `DelimitedFiles` is required to use the `LibDLF`.
 
