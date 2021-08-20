@@ -1,4 +1,4 @@
-name: julia-deploy
+name: package-julia
 
 on:
   pull_request:

@@ -68,6 +68,8 @@ base, j0, j1 = libdlf.hankel.wer_201_2018()
 
 ### Julia
 
+[![package-julia](https://github.com/emsig/libdlf/actions/workflows/package-julia.yml/badge.svg)](https://github.com/emsig/libdlf/actions/workflows/package-julia.yml)
+
 You can install `LibDLF` for Julia using:
 ```julia
 import Pkg
