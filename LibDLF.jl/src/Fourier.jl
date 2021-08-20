@@ -1,7 +1,5 @@
 module Fourier
 
-using DelimitedFiles
-
 libpath = @__DIR__
 
 cache = Dict() # local cache for any filters already loaded
@@ -41,9 +39,11 @@ base, fsin, fcos = LibDLF.Fourier.key_81_2009()
 """
 function key_81_2009()
 	if !haskey(cache,"key_81_2009") # read and add to cache
-		sfile = joinpath(libpath,"lib/Fourier/fourier_key_81_2009_sincos.txt")
-		dat = readdlm(sfile,comments=true)
-		cache["key_81_2009"]= tuple([dat[:,c] for c in 1:size(dat,2)]...)
+		bfile = joinpath(libpath,"lib/Fourier/fourier_key_81_2009_sincos.txt.bin")
+		bdat = Array{Float64}(undef,81,3)
+		read!(open(bfile,"r"),bdat)
+		bdat .= ltoh(bdat) # file save with little endian so convert to host's endian
+		cache["key_81_2009"]= tuple([bdat[:,c] for c in 1:size(bdat,2)]...)
 	end
 	return cache["key_81_2009"]
 end
@@ -83,9 +83,11 @@ base, fsin, fcos = LibDLF.Fourier.key_241_2009()
 """
 function key_241_2009()
 	if !haskey(cache,"key_241_2009") # read and add to cache
-		sfile = joinpath(libpath,"lib/Fourier/fourier_key_241_2009_sincos.txt")
-		dat = readdlm(sfile,comments=true)
-		cache["key_241_2009"]= tuple([dat[:,c] for c in 1:size(dat,2)]...)
+		bfile = joinpath(libpath,"lib/Fourier/fourier_key_241_2009_sincos.txt.bin")
+		bdat = Array{Float64}(undef,241,3)
+		read!(open(bfile,"r"),bdat)
+		bdat .= ltoh(bdat) # file save with little endian so convert to host's endian
+		cache["key_241_2009"]= tuple([bdat[:,c] for c in 1:size(bdat,2)]...)
 	end
 	return cache["key_241_2009"]
 end
@@ -125,9 +127,11 @@ base, fsin, fcos = LibDLF.Fourier.key_601_2009()
 """
 function key_601_2009()
 	if !haskey(cache,"key_601_2009") # read and add to cache
-		sfile = joinpath(libpath,"lib/Fourier/fourier_key_601_2009_sincos.txt")
-		dat = readdlm(sfile,comments=true)
-		cache["key_601_2009"]= tuple([dat[:,c] for c in 1:size(dat,2)]...)
+		bfile = joinpath(libpath,"lib/Fourier/fourier_key_601_2009_sincos.txt.bin")
+		bdat = Array{Float64}(undef,601,3)
+		read!(open(bfile,"r"),bdat)
+		bdat .= ltoh(bdat) # file save with little endian so convert to host's endian
+		cache["key_601_2009"]= tuple([bdat[:,c] for c in 1:size(bdat,2)]...)
 	end
 	return cache["key_601_2009"]
 end
@@ -166,9 +170,11 @@ base, fsin, fcos = LibDLF.Fourier.key_101_2012()
 """
 function key_101_2012()
 	if !haskey(cache,"key_101_2012") # read and add to cache
-		sfile = joinpath(libpath,"lib/Fourier/fourier_key_101_2012_sincos.txt")
-		dat = readdlm(sfile,comments=true)
-		cache["key_101_2012"]= tuple([dat[:,c] for c in 1:size(dat,2)]...)
+		bfile = joinpath(libpath,"lib/Fourier/fourier_key_101_2012_sincos.txt.bin")
+		bdat = Array{Float64}(undef,101,3)
+		read!(open(bfile,"r"),bdat)
+		bdat .= ltoh(bdat) # file save with little endian so convert to host's endian
+		cache["key_101_2012"]= tuple([bdat[:,c] for c in 1:size(bdat,2)]...)
 	end
 	return cache["key_101_2012"]
 end
@@ -207,9 +213,11 @@ base, fsin, fcos = LibDLF.Fourier.key_201_2012()
 """
 function key_201_2012()
 	if !haskey(cache,"key_201_2012") # read and add to cache
-		sfile = joinpath(libpath,"lib/Fourier/fourier_key_201_2012_sincos.txt")
-		dat = readdlm(sfile,comments=true)
-		cache["key_201_2012"]= tuple([dat[:,c] for c in 1:size(dat,2)]...)
+		bfile = joinpath(libpath,"lib/Fourier/fourier_key_201_2012_sincos.txt.bin")
+		bdat = Array{Float64}(undef,201,3)
+		read!(open(bfile,"r"),bdat)
+		bdat .= ltoh(bdat) # file save with little endian so convert to host's endian
+		cache["key_201_2012"]= tuple([bdat[:,c] for c in 1:size(bdat,2)]...)
 	end
 	return cache["key_201_2012"]
 end
@@ -249,9 +257,11 @@ base, fsin = LibDLF.Fourier.grayver_50_2021()
 """
 function grayver_50_2021()
 	if !haskey(cache,"grayver_50_2021") # read and add to cache
-		sfile = joinpath(libpath,"lib/Fourier/fourier_grayver_50_2021_sin.txt")
-		dat = readdlm(sfile,comments=true)
-		cache["grayver_50_2021"]= tuple([dat[:,c] for c in 1:size(dat,2)]...)
+		bfile = joinpath(libpath,"lib/Fourier/fourier_grayver_50_2021_sin.txt.bin")
+		bdat = Array{Float64}(undef,50,2)
+		read!(open(bfile,"r"),bdat)
+		bdat .= ltoh(bdat) # file save with little endian so convert to host's endian
+		cache["grayver_50_2021"]= tuple([bdat[:,c] for c in 1:size(bdat,2)]...)
 	end
 	return cache["grayver_50_2021"]
 end

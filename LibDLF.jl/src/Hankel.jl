@@ -1,7 +1,5 @@
 module Hankel
 
-using DelimitedFiles
-
 libpath = @__DIR__
 
 cache = Dict() # local cache for any filters already loaded
@@ -44,9 +42,11 @@ base, j0, j1 = LibDLF.Hankel.anderson_801_1982()
 """
 function anderson_801_1982()
 	if !haskey(cache,"anderson_801_1982") # read and add to cache
-		sfile = joinpath(libpath,"lib/Hankel/hankel_anderson_801_1982_j0j1.txt")
-		dat = readdlm(sfile,comments=true)
-		cache["anderson_801_1982"]= tuple([dat[:,c] for c in 1:size(dat,2)]...)
+		bfile = joinpath(libpath,"lib/Hankel/hankel_anderson_801_1982_j0j1.txt.bin")
+		bdat = Array{Float64}(undef,801,3)
+		read!(open(bfile,"r"),bdat)
+		bdat .= ltoh(bdat) # file save with little endian so convert to host's endian
+		cache["anderson_801_1982"]= tuple([bdat[:,c] for c in 1:size(bdat,2)]...)
 	end
 	return cache["anderson_801_1982"]
 end
@@ -97,9 +97,11 @@ base, j0, j1 = LibDLF.Hankel.kong_61_2007b()
 """
 function kong_61_2007b()
 	if !haskey(cache,"kong_61_2007b") # read and add to cache
-		sfile = joinpath(libpath,"lib/Hankel/hankel_kong_61_2007b_j0j1.txt")
-		dat = readdlm(sfile,comments=true)
-		cache["kong_61_2007b"]= tuple([dat[:,c] for c in 1:size(dat,2)]...)
+		bfile = joinpath(libpath,"lib/Hankel/hankel_kong_61_2007b_j0j1.txt.bin")
+		bdat = Array{Float64}(undef,61,3)
+		read!(open(bfile,"r"),bdat)
+		bdat .= ltoh(bdat) # file save with little endian so convert to host's endian
+		cache["kong_61_2007b"]= tuple([bdat[:,c] for c in 1:size(bdat,2)]...)
 	end
 	return cache["kong_61_2007b"]
 end
@@ -147,9 +149,11 @@ base, j0, j1 = LibDLF.Hankel.kong_121_2007()
 """
 function kong_121_2007()
 	if !haskey(cache,"kong_121_2007") # read and add to cache
-		sfile = joinpath(libpath,"lib/Hankel/hankel_kong_121_2007_j0j1.txt")
-		dat = readdlm(sfile,comments=true)
-		cache["kong_121_2007"]= tuple([dat[:,c] for c in 1:size(dat,2)]...)
+		bfile = joinpath(libpath,"lib/Hankel/hankel_kong_121_2007_j0j1.txt.bin")
+		bdat = Array{Float64}(undef,121,3)
+		read!(open(bfile,"r"),bdat)
+		bdat .= ltoh(bdat) # file save with little endian so convert to host's endian
+		cache["kong_121_2007"]= tuple([bdat[:,c] for c in 1:size(bdat,2)]...)
 	end
 	return cache["kong_121_2007"]
 end
@@ -197,9 +201,11 @@ base, j0, j1 = LibDLF.Hankel.kong_241_2007()
 """
 function kong_241_2007()
 	if !haskey(cache,"kong_241_2007") # read and add to cache
-		sfile = joinpath(libpath,"lib/Hankel/hankel_kong_241_2007_j0j1.txt")
-		dat = readdlm(sfile,comments=true)
-		cache["kong_241_2007"]= tuple([dat[:,c] for c in 1:size(dat,2)]...)
+		bfile = joinpath(libpath,"lib/Hankel/hankel_kong_241_2007_j0j1.txt.bin")
+		bdat = Array{Float64}(undef,241,3)
+		read!(open(bfile,"r"),bdat)
+		bdat .= ltoh(bdat) # file save with little endian so convert to host's endian
+		cache["kong_241_2007"]= tuple([bdat[:,c] for c in 1:size(bdat,2)]...)
 	end
 	return cache["kong_241_2007"]
 end
@@ -239,9 +245,11 @@ base, j0, j1 = LibDLF.Hankel.key_101_2009()
 """
 function key_101_2009()
 	if !haskey(cache,"key_101_2009") # read and add to cache
-		sfile = joinpath(libpath,"lib/Hankel/hankel_key_101_2009_j0j1.txt")
-		dat = readdlm(sfile,comments=true)
-		cache["key_101_2009"]= tuple([dat[:,c] for c in 1:size(dat,2)]...)
+		bfile = joinpath(libpath,"lib/Hankel/hankel_key_101_2009_j0j1.txt.bin")
+		bdat = Array{Float64}(undef,101,3)
+		read!(open(bfile,"r"),bdat)
+		bdat .= ltoh(bdat) # file save with little endian so convert to host's endian
+		cache["key_101_2009"]= tuple([bdat[:,c] for c in 1:size(bdat,2)]...)
 	end
 	return cache["key_101_2009"]
 end
@@ -281,9 +289,11 @@ base, j0, j1 = LibDLF.Hankel.key_201_2009()
 """
 function key_201_2009()
 	if !haskey(cache,"key_201_2009") # read and add to cache
-		sfile = joinpath(libpath,"lib/Hankel/hankel_key_201_2009_j0j1.txt")
-		dat = readdlm(sfile,comments=true)
-		cache["key_201_2009"]= tuple([dat[:,c] for c in 1:size(dat,2)]...)
+		bfile = joinpath(libpath,"lib/Hankel/hankel_key_201_2009_j0j1.txt.bin")
+		bdat = Array{Float64}(undef,201,3)
+		read!(open(bfile,"r"),bdat)
+		bdat .= ltoh(bdat) # file save with little endian so convert to host's endian
+		cache["key_201_2009"]= tuple([bdat[:,c] for c in 1:size(bdat,2)]...)
 	end
 	return cache["key_201_2009"]
 end
@@ -323,9 +333,11 @@ base, j0, j1 = LibDLF.Hankel.key_401_2009()
 """
 function key_401_2009()
 	if !haskey(cache,"key_401_2009") # read and add to cache
-		sfile = joinpath(libpath,"lib/Hankel/hankel_key_401_2009_j0j1.txt")
-		dat = readdlm(sfile,comments=true)
-		cache["key_401_2009"]= tuple([dat[:,c] for c in 1:size(dat,2)]...)
+		bfile = joinpath(libpath,"lib/Hankel/hankel_key_401_2009_j0j1.txt.bin")
+		bdat = Array{Float64}(undef,401,3)
+		read!(open(bfile,"r"),bdat)
+		bdat .= ltoh(bdat) # file save with little endian so convert to host's endian
+		cache["key_401_2009"]= tuple([bdat[:,c] for c in 1:size(bdat,2)]...)
 	end
 	return cache["key_401_2009"]
 end
@@ -364,9 +376,11 @@ base, j0, j1 = LibDLF.Hankel.key_51_2012()
 """
 function key_51_2012()
 	if !haskey(cache,"key_51_2012") # read and add to cache
-		sfile = joinpath(libpath,"lib/Hankel/hankel_key_51_2012_j0j1.txt")
-		dat = readdlm(sfile,comments=true)
-		cache["key_51_2012"]= tuple([dat[:,c] for c in 1:size(dat,2)]...)
+		bfile = joinpath(libpath,"lib/Hankel/hankel_key_51_2012_j0j1.txt.bin")
+		bdat = Array{Float64}(undef,51,3)
+		read!(open(bfile,"r"),bdat)
+		bdat .= ltoh(bdat) # file save with little endian so convert to host's endian
+		cache["key_51_2012"]= tuple([bdat[:,c] for c in 1:size(bdat,2)]...)
 	end
 	return cache["key_51_2012"]
 end
@@ -405,9 +419,11 @@ base, j0, j1 = LibDLF.Hankel.key_101_2012()
 """
 function key_101_2012()
 	if !haskey(cache,"key_101_2012") # read and add to cache
-		sfile = joinpath(libpath,"lib/Hankel/hankel_key_101_2012_j0j1.txt")
-		dat = readdlm(sfile,comments=true)
-		cache["key_101_2012"]= tuple([dat[:,c] for c in 1:size(dat,2)]...)
+		bfile = joinpath(libpath,"lib/Hankel/hankel_key_101_2012_j0j1.txt.bin")
+		bdat = Array{Float64}(undef,101,3)
+		read!(open(bfile,"r"),bdat)
+		bdat .= ltoh(bdat) # file save with little endian so convert to host's endian
+		cache["key_101_2012"]= tuple([bdat[:,c] for c in 1:size(bdat,2)]...)
 	end
 	return cache["key_101_2012"]
 end
@@ -446,9 +462,11 @@ base, j0, j1 = LibDLF.Hankel.key_201_2012()
 """
 function key_201_2012()
 	if !haskey(cache,"key_201_2012") # read and add to cache
-		sfile = joinpath(libpath,"lib/Hankel/hankel_key_201_2012_j0j1.txt")
-		dat = readdlm(sfile,comments=true)
-		cache["key_201_2012"]= tuple([dat[:,c] for c in 1:size(dat,2)]...)
+		bfile = joinpath(libpath,"lib/Hankel/hankel_key_201_2012_j0j1.txt.bin")
+		bdat = Array{Float64}(undef,201,3)
+		read!(open(bfile,"r"),bdat)
+		bdat .= ltoh(bdat) # file save with little endian so convert to host's endian
+		cache["key_201_2012"]= tuple([bdat[:,c] for c in 1:size(bdat,2)]...)
 	end
 	return cache["key_201_2012"]
 end
@@ -491,9 +509,11 @@ base, j0, j1 = LibDLF.Hankel.wer_201_2018()
 """
 function wer_201_2018()
 	if !haskey(cache,"wer_201_2018") # read and add to cache
-		sfile = joinpath(libpath,"lib/Hankel/hankel_wer_201_2018_j0j1.txt")
-		dat = readdlm(sfile,comments=true)
-		cache["wer_201_2018"]= tuple([dat[:,c] for c in 1:size(dat,2)]...)
+		bfile = joinpath(libpath,"lib/Hankel/hankel_wer_201_2018_j0j1.txt.bin")
+		bdat = Array{Float64}(undef,201,3)
+		read!(open(bfile,"r"),bdat)
+		bdat .= ltoh(bdat) # file save with little endian so convert to host's endian
+		cache["wer_201_2018"]= tuple([bdat[:,c] for c in 1:size(bdat,2)]...)
 	end
 	return cache["wer_201_2018"]
 end
@@ -536,9 +556,11 @@ base, j0, j1 = LibDLF.Hankel.wer_2001_2018()
 """
 function wer_2001_2018()
 	if !haskey(cache,"wer_2001_2018") # read and add to cache
-		sfile = joinpath(libpath,"lib/Hankel/hankel_wer_2001_2018_j0j1.txt")
-		dat = readdlm(sfile,comments=true)
-		cache["wer_2001_2018"]= tuple([dat[:,c] for c in 1:size(dat,2)]...)
+		bfile = joinpath(libpath,"lib/Hankel/hankel_wer_2001_2018_j0j1.txt.bin")
+		bdat = Array{Float64}(undef,2001,3)
+		read!(open(bfile,"r"),bdat)
+		bdat .= ltoh(bdat) # file save with little endian so convert to host's endian
+		cache["wer_2001_2018"]= tuple([bdat[:,c] for c in 1:size(bdat,2)]...)
 	end
 	return cache["wer_2001_2018"]
 end
