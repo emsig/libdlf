@@ -37,10 +37,11 @@ jobs:
           julia create_julia.jl 
       - name: run tests 
         run: |
-          cd packages/julia/LibDLF.jl     
+              
       #- uses: julia-actions/julia-buildpkg@v1
       - uses: julia-actions/julia-runtest@v1
-
+        with:
+          prefix: cd packages/julia/LibDLF.jl;
 
   deploy:  
     name: Deploy package-julia   
