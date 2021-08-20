@@ -31,16 +31,19 @@ jobs:
           version: '1.6'
       - name: Install dependencies
         run: julia -e 'import Pkg; Pkg.add("DataStructures"); Pkg.add("JSON")'           
-      - name: Create package
+      - name: Create package files
         run: |
           cd packages
-          julia create_julia.jl 
-      #- name: run tests 
-      #  run: | 
-      - uses: julia-actions/julia-buildpkg@v1
-      - uses: julia-actions/julia-runtest@v1
-        #with:
-        #  prefix: cd packages/julia/LibDLF.jl;
+          julia --color=yes create_julia.jl 
+      - name: Build package
+        run: |
+          cd packages/julia/LibDLF.jl
+          julia --color=yes "$GITHUB_ACTION_PATH"/add_general_registry.jl
+          julia --color=yes --project=@. -e 'using Pkg; if VERSION >= v"1.1.0-rc1"; Pkg.build(verbose=true); else Pkg.build(); end'
+      - name: Run tests
+        run: |
+          cd packages/julia/LibDLF.jl/test
+          julia --color=yes  runtests.jl 
 
   deploy:  
     name: Deploy package-julia   
