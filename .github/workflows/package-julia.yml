@@ -38,7 +38,6 @@ jobs:
       - name: Build package
         run: |
           cd packages/julia/LibDLF.jl
-          julia --color=yes "$GITHUB_ACTION_PATH"/add_general_registry.jl
           julia --color=yes --project=@. -e 'using Pkg; if VERSION >= v"1.1.0-rc1"; Pkg.build(verbose=true); else Pkg.build(); end'
       - name: Run tests
         run: |
