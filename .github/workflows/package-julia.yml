@@ -18,7 +18,7 @@ jobs:
   test:  
     name: Build and test package-julia   
     runs-on: ubuntu-latest
- 
+    
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -42,11 +42,8 @@ jobs:
       - name: Run tests
         run: |
           cd packages/julia/LibDLF.jl 
-          julia --check-bounds=yes --color=yes --project=./ -e 'import Pkg;Pkg.test()' 
-          # Run the Julia command
-          #"${julia_cmd[@]}"
-         
-
+          julia --check-bounds=yes --color=yes --project=./ -e 'import Pkg; Pkg.test()' 
+                
   deploy:  
     name: Deploy package-julia   
     runs-on: ubuntu-latest
