@@ -1,3 +1,4 @@
 packages/python/
 __pycache__
 .vscode/ 
+packages/julia/
