@@ -14,11 +14,43 @@ defaults:
     shell: bash
 
 jobs:
-  # test:  
-  deploy:  
-    name: Deploy to package-julia   
-    runs-on: ubuntu-latest
  
+  test:  
+    name: Build and test package-julia   
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 100  
+      - name: Fetch git tags   
+        run: git fetch origin 'refs/tags/*:refs/tags/*'
+      - uses: julia-actions/setup-julia@v1
+        with:
+          version: '1.6'
+      - name: Install dependencies
+        run: julia -e 'import Pkg; Pkg.add("DataStructures"); Pkg.add("JSON")'           
+      - name: Create package files
+        run: |
+          cd packages
+          julia --color=yes create_julia.jl 
+      - name: Build package
+        run: |
+          cd packages/julia/LibDLF.jl
+          julia --color=yes --project=@. -e 'using Pkg; if VERSION >= v"1.1.0-rc1"; Pkg.build(verbose=true); else Pkg.build(); end'
+      - name: Run tests
+        run: |
+          cd packages/julia/LibDLF.jl 
+          julia --check-bounds=yes --color=yes --project=./ -e 'import Pkg; Pkg.test()' 
+                
+  deploy:  
+    name: Deploy package-julia   
+    runs-on: ubuntu-latest
+    needs: test
+    # Only from the origin repository, not forks; only main and tags.
+    if: github.repository_owner == 'emsig' && (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/'))
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -44,7 +76,6 @@ jobs:
           FOLDER: packages/julia
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
- 
 
  
         
