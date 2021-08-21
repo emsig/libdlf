@@ -2,7 +2,7 @@ name: julia-register
 on:
   push:
     branches:
-      - main
+      - package-julia
     paths:
       - '**.toml'
 
