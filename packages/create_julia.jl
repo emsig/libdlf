@@ -1,3 +1,4 @@
+
 using DataStructures
 using DelimitedFiles
 import JSON
@@ -34,6 +35,62 @@ println(iop,"\n[targets]")
 println(iop,"test = [\"Test\"]")
 close(iop)
 
+# Open runtests.jl
+iotest = open(abspath(pkgdir * "/Test/runtests.jl"), "w")
+println(iotest,"using LibDLF")
+println(iotest,"using Test")
+
+# Test settings
+println(iotest,"\n# Relative tolerance for test result accuracy")
+println(iotest,"test_rtol = 1e-4")
+
+println(iotest,"\n# Test at x=1. where filters usually have small relative error")
+println(iotest,"x_test = 1.")
+
+# Add testing function pairs to runtest.jl
+println(iotest,"\n# Testing function pairs (from Anderson,1975, with a=1)")
+println(iotest,"rhs_j0(x)   = exp(-x^2 / 4.) / 2.")
+println(iotest,"rhs_j1(x)   = exp(-x^2 / 4.) * x / 4.")
+println(iotest,"lhs_j0(lam) = exp(-lam^2) * lam")
+println(iotest,"lhs_j1(lam) = exp(-lam^2) * lam^2")
+println(iotest,"rhs_fcos(x) = exp(-x^2 / 4.) / 2 * sqrt(π)")
+println(iotest,"rhs_fsin(x) = exp(-x^2 / 4.) / 4 * sqrt(π) * x")
+println(iotest,"lhs_fcos(ω) = exp(-ω^2)")
+println(iotest,"lhs_fsin(ω) = exp(-ω^2) * ω")
+
+# J0 transform test function
+println(iotest,"\nfunction j0_test(base,j0)")
+println(iotest,"\tlam = base/x_test")
+println(iotest,"\tfht = (lhs_j0.(lam)' * j0) / x_test")
+println(iotest,"\trhs =  rhs_j0(x_test)")
+println(iotest,"\treturn abs(fht - rhs) ./ abs(rhs) ")
+println(iotest,"end")
+
+# J1 transform test function
+println(iotest,"\nfunction j1_test(base,j1)")
+println(iotest,"\tlam = base/x_test")
+println(iotest,"\tfht = (lhs_j1.(lam)' * j1) / x_test")
+println(iotest,"\trhs =  rhs_j1(x_test)")
+println(iotest,"\treturn abs(fht - rhs) ./ abs(rhs) ")
+println(iotest,"end")
+
+# cos transform test function
+println(iotest,"\nfunction fcos_test(base,fcos)")
+println(iotest,"\tω = base/x_test")
+println(iotest,"\tfct = (lhs_fcos.(ω)' * fcos) / x_test")
+println(iotest,"\trhs =  rhs_fcos(x_test)")
+println(iotest,"\treturn abs(fct - rhs) ./ abs(rhs) ")
+println(iotest,"end")
+
+# sin transform test function
+println(iotest,"\nfunction fsin_test(base,fsin)")
+println(iotest,"\tω = base/x_test")
+println(iotest,"\tfst = (lhs_fsin.(ω)' * fsin) / x_test")
+println(iotest,"\trhs =  rhs_fsin(x_test)")
+println(iotest,"\treturn abs(fst - rhs) ./ abs(rhs) ")
+println(iotest,"end")
+
+println(iotest,"\n# Unit tests")
 # Read in .json file listing all filters
 filters = JSON.parsefile("../lib/filters.json", dicttype=DataStructures.OrderedDict)
 
@@ -48,8 +105,11 @@ for type in filters.keys
 
     stype = titlecase(type)
 
-    # make directory for this type
+    # Make directory for this type
     mkpath(pkgdir * "src/lib/$stype")
+
+    # Add filter type section to runtests.jl
+    println(iotest, "\n@testset \"$stype\" begin")
 
     # Include sub module file in parent
     println(iol, "include(\"$stype.jl\")")
@@ -147,7 +207,17 @@ for type in filters.keys
         # Close file
         close(iof)
 
+        # Add filter tests to runtests.jl
+        println(iotest, "\n\t@testset \"$sname\" begin")
+        println(iotest, "\t\tbase, $vals = LibDLF.$stype.$sname()")
+        for val in strip.(split(vals, ","))
+            ft = val * "_test"
+            println(iotest, "\t\t@test $ft(base,$val) < test_rtol")
+        end
+        println(iotest, "\tend")
     end
+
+    println(iotest, "end")
 
     # Close filter type sub module
     println(iot, "\nend")
@@ -157,6 +227,9 @@ end
 # Close LibDLF module
 println(iol,"\nend")
 close(iol)
+
+# Close runtest.jl
+close(iotest)
 
 # Create README
 iord = open(abspath(pkgdir * "README.md"), "w")
@@ -173,10 +246,3 @@ println(iord,"\nThis package is auto-generated. See
 instructions.")
 
 close(iord)
-
-# Create testing routine
-ior = open(abspath(pkgdir * "test/runtests.jl"), "w")
-println(ior,"using LibDLF")
-println(ior,"using Test\n")
-println(ior,"# insert code for @testset blocks and @test unit tests ")
-close(ior)
