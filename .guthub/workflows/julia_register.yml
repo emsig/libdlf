@@ -1,0 +1,21 @@
+
+name: julia-register
+on: push
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+ 
+  register:  
+    name: Register   
+    runs-on: ubuntu-latest
+ 
+    steps:
+    - name: Create commit comment
+      uses: peter-evans/commit-comment@v1
+      with:
+        body: |
+          @JuliaRegistrator register subdir=LibDLF.jl
+ 
