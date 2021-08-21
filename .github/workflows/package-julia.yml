@@ -57,7 +57,7 @@ jobs:
         with:
           fetch-depth: 100  
       - name: Fetch git tags   
-        run: git fetch origin 'refs/tags/*:refs/tags/*'
+        run: git fetch origin 'refs/tags/*:refs/tags/*'  
       - uses: julia-actions/setup-julia@v1
         with:
           version: '1.6'
@@ -76,6 +76,24 @@ jobs:
           FOLDER: packages/julia
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           CLEAR_GLOBS_FILE: ".github/workflows/.clear-target-files"
+      - name: check out package-julia branch  
+        uses: actions/checkout@v2
+        with:
+            ref: package-julia
+      #- name: get last commit SHA on package-julia branch     
+      - id: get-sha
+        run: |
+          sha=$(git log -1 --format=format:"%H")
+          echo ::set-output name=last_sha::$sha
+      - name: Create commit comment
+        uses: peter-evans/commit-comment@v1
+        with:
+          body: |
+            @JuliaRegistrator register subdir=LibDLF.jl 
+          sha:  ${{ steps.get-sha.outputs.last_sha }}
+      
+     
+            
 
 
  
