@@ -1,5 +1,7 @@
 name: julia-register
 on: push
+  paths:
+      - '**.toml'
 
 defaults:
   run:
