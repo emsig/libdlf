@@ -36,7 +36,7 @@ println(iop,"test = [\"Test\"]")
 close(iop)
 
 # Open runtests.jl
-iotest = open(abspath(pkgdir * "/Test/runtests.jl"), "w")
+iotest = open(abspath(pkgdir * "test/runtests.jl"), "w")
 println(iotest,"using LibDLF")
 println(iotest,"using Test")
 
