@@ -55,6 +55,26 @@ end
 		@test j1_test(base,j1) < test_rtol
 	end
 
+	@testset "gupt_61_1997" begin
+		base, j0 = LibDLF.Hankel.gupt_61_1997()
+		@test j0_test(base,j0) < test_rtol
+	end
+
+	@testset "gupt_120_1997" begin
+		base, j0 = LibDLF.Hankel.gupt_120_1997()
+		@test j0_test(base,j0) < test_rtol
+	end
+
+	@testset "gupt_47_1997" begin
+		base, j1 = LibDLF.Hankel.gupt_47_1997()
+		@test j1_test(base,j1) < test_rtol
+	end
+
+	@testset "gupt_140_1997" begin
+		base, j1 = LibDLF.Hankel.gupt_140_1997()
+		@test j1_test(base,j1) < test_rtol
+	end
+
 	@testset "kong_61_2007b" begin
 		base, j0, j1 = LibDLF.Hankel.kong_61_2007b()
 		@test j0_test(base,j0) < test_rtol

@@ -52,6 +52,170 @@ function anderson_801_1982()
 end
 
 """
+	 gupt_61_1997()
+
+ 61 point Hankel filter, J0
+
+
+
+ > Guptasarma, D. and B. Singh, 1997;
+ > New digital linear filters for Hankel J0 and J1 transforms;
+ > Geophysical Prospecting, 45(5), 745-762;
+ > DOI: 10.1046/j.1365-2478.1997.500292.x
+
+
+ Copyright 1997 D. Guptasarma and B. Singh
+
+ This work is licensed under a CC BY 4.0 license.
+ <http://creativecommons.org/licenses/by/4.0/>.
+
+# Returns
+
+base, j0 :: Array{Float64,1}
+Filter base and its values.
+
+# Example
+
+```julia
+base, j0 = LibDLF.Hankel.gupt_61_1997()
+```
+
+"""
+function gupt_61_1997()
+	if !haskey(cache,"gupt_61_1997") # read and add to cache
+		bfile = joinpath(libpath,"lib/Hankel/hankel_gupt_61_1997_j0.txt.bin")
+		bdat = Array{Float64}(undef,61,2)
+		read!(open(bfile,"r"),bdat)
+		bdat .= ltoh(bdat) # file save with little endian so convert to host's endian
+		cache["gupt_61_1997"]= tuple([bdat[:,c] for c in 1:size(bdat,2)]...)
+	end
+	return cache["gupt_61_1997"]
+end
+
+"""
+	 gupt_120_1997()
+
+ 120 point Hankel filter, J0
+
+
+
+ > Guptasarma, D. and B. Singh, 1997;
+ > New digital linear filters for Hankel J0 and J1 transforms;
+ > Geophysical Prospecting, 45(5), 745-762;
+ > DOI: 10.1046/j.1365-2478.1997.500292.x
+
+
+ Copyright 1997 D. Guptasarma and B. Singh
+
+ This work is licensed under a CC BY 4.0 license.
+ <http://creativecommons.org/licenses/by/4.0/>.
+
+# Returns
+
+base, j0 :: Array{Float64,1}
+Filter base and its values.
+
+# Example
+
+```julia
+base, j0 = LibDLF.Hankel.gupt_120_1997()
+```
+
+"""
+function gupt_120_1997()
+	if !haskey(cache,"gupt_120_1997") # read and add to cache
+		bfile = joinpath(libpath,"lib/Hankel/hankel_gupt_120_1997_j0.txt.bin")
+		bdat = Array{Float64}(undef,120,2)
+		read!(open(bfile,"r"),bdat)
+		bdat .= ltoh(bdat) # file save with little endian so convert to host's endian
+		cache["gupt_120_1997"]= tuple([bdat[:,c] for c in 1:size(bdat,2)]...)
+	end
+	return cache["gupt_120_1997"]
+end
+
+"""
+	 gupt_47_1997()
+
+ 47 point Hankel filter, J1
+
+
+
+ > Guptasarma, D. and B. Singh, 1997;
+ > New digital linear filters for Hankel J0 and J1 transforms;
+ > Geophysical Prospecting, 45(5), 745-762;
+ > DOI: 10.1046/j.1365-2478.1997.500292.x
+
+
+ Copyright 1997 D. Guptasarma and B. Singh
+
+ This work is licensed under a CC BY 4.0 license.
+ <http://creativecommons.org/licenses/by/4.0/>.
+
+# Returns
+
+base, j1 :: Array{Float64,1}
+Filter base and its values.
+
+# Example
+
+```julia
+base, j1 = LibDLF.Hankel.gupt_47_1997()
+```
+
+"""
+function gupt_47_1997()
+	if !haskey(cache,"gupt_47_1997") # read and add to cache
+		bfile = joinpath(libpath,"lib/Hankel/hankel_gupt_47_1997_j1.txt.bin")
+		bdat = Array{Float64}(undef,47,2)
+		read!(open(bfile,"r"),bdat)
+		bdat .= ltoh(bdat) # file save with little endian so convert to host's endian
+		cache["gupt_47_1997"]= tuple([bdat[:,c] for c in 1:size(bdat,2)]...)
+	end
+	return cache["gupt_47_1997"]
+end
+
+"""
+	 gupt_140_1997()
+
+ 140 point Hankel filter, J1
+
+
+
+ > Guptasarma, D. and B. Singh, 1997;
+ > New digital linear filters for Hankel J0 and J1 transforms;
+ > Geophysical Prospecting, 45(5), 745-762;
+ > DOI: 10.1046/j.1365-2478.1997.500292.x
+
+
+ Copyright 1997 D. Guptasarma and B. Singh
+
+ This work is licensed under a CC BY 4.0 license.
+ <http://creativecommons.org/licenses/by/4.0/>.
+
+# Returns
+
+base, j1 :: Array{Float64,1}
+Filter base and its values.
+
+# Example
+
+```julia
+base, j1 = LibDLF.Hankel.gupt_140_1997()
+```
+
+"""
+function gupt_140_1997()
+	if !haskey(cache,"gupt_140_1997") # read and add to cache
+		bfile = joinpath(libpath,"lib/Hankel/hankel_gupt_140_1997_j1.txt.bin")
+		bdat = Array{Float64}(undef,140,2)
+		read!(open(bfile,"r"),bdat)
+		bdat .= ltoh(bdat) # file save with little endian so convert to host's endian
+		cache["gupt_140_1997"]= tuple([bdat[:,c] for c in 1:size(bdat,2)]...)
+	end
+	return cache["gupt_140_1997"]
+end
+
+"""
 	 kong_61_2007b()
 
  61 point Hankel filter, J0 and J1
