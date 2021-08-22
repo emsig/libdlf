@@ -21,15 +21,21 @@ for electromagnetic modelling.
   - [File format](#file-format)
   - [Structure](#structure)
   - [json](#json)
+  - [versioning](#versioning)
 - [License](#license)
 
 ## Digital Linear Filters
+
+This section is unfortunately still missing. However, in the meanwhile we refer
+to the document
+[DLF-in-Geophysics.pdf](https://github.com/emsig/article-fdesign/raw/master/DLF-in-Geophysics.pdf)
+in the repo [emsig/article-fdesign](https://github.com/emsig/article-fdesign),
+and the references therein.
 
 TODO: brief theory and history, main references.
 
 TODO: Some examples and figures, particularly to show what happens when you
 reach the limit of a filter (longer is not necessary better).
-
 
 ## Usage
 
@@ -65,6 +71,16 @@ base, j0, j1 = libdlf.hankel.wer_201_2018()
 
 # TODO: Do actual transform with the filter.
 ```
+
+Different filters return different values. You can inspect what a filter
+returns via
+
+```python
+libdlf.hankel.wer_201_2018.values
+```
+
+which, in the above case, will return `['j0', 'j1']`.
+
 
 ### Julia
 
@@ -104,6 +120,10 @@ ToDo
 We welcome contributions of any kind. New filters, better documentation,
 cleverer or easier distribution, typos, you name it. Simply open an issue or
 create a PR!
+
+If you would like to contribute a filter but do not use GitHub feel free to
+email them to use, together with the permission to distribute them under the
+CC-BY-4.0 license, and we'll add them to the library.
 
 
 ### New filters
@@ -231,7 +251,18 @@ filter, starting at `lib/`. Appendix will be an empty string, `""`, in most
 cases (see above under *File naming*).
 
 
-# License
+### Versioning
+
+`libdlf` uses the `major.minor.point` scheme.
+
+- New filters added to the library will cause an increase of the minor number.
+- New language packages added to the library cause also an increase of the
+  minor number.
+- Changes to particular packages (e.g. Python or Julia) without changes to the
+  actual library will only result in point releases.
+
+
+## License
 
 This work is licensed under a CC BY 4.0 license.
 <http://creativecommons.org/licenses/by/4.0/>.
