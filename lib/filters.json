@@ -10,6 +10,42 @@
       "file": "lib/Hankel/hankel_anderson_801_1982_j0j1.txt"
     },
     {
+      "name" : "gupt_61_1997",
+      "author": "D. Guptasarma and B. Singh",
+      "year": "1997",
+      "appendix": "",
+      "points": 61,
+      "values": "j0",
+      "file": "lib/Hankel/hankel_gupt_61_1997_j0.txt"
+    },
+    {
+      "name" : "gupt_120_1997",
+      "author": "D. Guptasarma and B. Singh",
+      "year": "1997",
+      "appendix": "",
+      "points": 120,
+      "values": "j0",
+      "file": "lib/Hankel/hankel_gupt_120_1997_j0.txt"
+    },
+    {
+      "name" : "gupt_47_1997",
+      "author": "D. Guptasarma and B. Singh",
+      "year": "1997",
+      "appendix": "",
+      "points": 47,
+      "values": "j1",
+      "file": "lib/Hankel/hankel_gupt_47_1997_j1.txt"
+    },
+    {
+      "name" : "gupt_140_1997",
+      "author": "D. Guptasarma and B. Singh",
+      "year": "1997",
+      "appendix": "",
+      "points": 140,
+      "values": "j1",
+      "file": "lib/Hankel/hankel_gupt_140_1997_j1.txt"
+    },
+    {
       "name" : "kong_61_2007b",
       "author": "Fannian N. Kong",
       "year": "2007",
