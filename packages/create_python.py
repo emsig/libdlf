@@ -20,9 +20,12 @@ pathlib.Path(abspath("python/libdlf")).mkdir(parents=True, exist_ok=True)
 shutil.copytree(abspath('../lib'), abspath('python/libdlf/lib'),
                 dirs_exist_ok=True)
 
-# Copy README and LICENSE
+# Copy README
 shutil.copyfile('../README.md', 'python/README.md')
-shutil.copyfile('../LICENSE', 'python/LICENSE')
+
+# Copy LICENSEs
+shutil.copyfile('../LICENSE', 'python/libdlf/lib/LICENSE')
+shutil.copyfile('LICENSE', 'python/LICENSE')
 
 # Create setup.py
 setup = f"""# -*- coding: utf-8 -*-
@@ -41,7 +44,7 @@ setup(
     author="The emsig community",
     author_email="info@emsig.xyz",
     url="https://github.com/emsig/libdlf",
-    license="CC-BY-4.0",
+    license="BSD-3-Clause",
     packages=["libdlf"],
     include_package_data=True,
     install_requires=["numpy"],
@@ -58,10 +61,12 @@ with open(abspath("python/setup.cfg"), "w") as fs:
 # Create MANIFEST.in
 with open(abspath("python/MANIFEST.in"), "w") as fm:
     fm.write("include libdlf/lib/filters.json\n")
+    fm.write("include libdlf/lib/LICENSE\n")
     fm.write("include libdlf/lib/*/*.txt\n")
     fm.write("include LICENSE\n")
     fm.write("exclude MANIFEST.in\n")
     fm.write("exclude setup.cfg\n")
+
 
 # Read json
 with open(abspath('python/libdlf/lib/filters.json')) as fj:
