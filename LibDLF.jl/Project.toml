@@ -1,7 +1,7 @@
 name = "LibDLF"
 uuid = "f0c3f387-4ff6-435f-9d63-77e28b8d1347"
 authors = ["The emsig community <info@emsig.xyz> "]
-version = "0.1.4"
+version = "0.2.0"
 
 [deps]
 DelimitedFiles = "8bb1440f-4735-579b-a4ab-409b98df4dab"
