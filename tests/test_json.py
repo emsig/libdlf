@@ -1,6 +1,5 @@
 import os
 import json
-import pytest
 
 
 class TestJson:
@@ -18,7 +17,6 @@ class TestJson:
 
         # Assert #dir == #categories
         assert len(self.filters) == len(transforms)
-
 
         keys = ['name', 'author', 'year', 'appendix', 'points', 'values',
                 'file']

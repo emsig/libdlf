@@ -1,7 +1,9 @@
+import os
 import json
 import shutil
 import pathlib
 import subprocess
+import numpy as np
 from os.path import abspath
 
 # Get git version
@@ -14,11 +16,12 @@ else:
     version = version[0][1:]
 
 # Create package directory
-pathlib.Path(abspath("python/libdlf")).mkdir(parents=True, exist_ok=True)
+path_libdlf = abspath("python/libdlf")
+path_lib = os.path.join(path_libdlf, 'lib')
+pathlib.Path(path_libdlf).mkdir(parents=True, exist_ok=True)
 
 # Copy library to python package
-shutil.copytree(abspath('../lib'), abspath('python/libdlf/lib'),
-                dirs_exist_ok=True)
+shutil.copytree(abspath('../lib'), path_lib, dirs_exist_ok=True)
 
 # Copy README
 shutil.copyfile('../README.md', 'python/README.md')
@@ -60,21 +63,20 @@ with open(abspath("python/setup.cfg"), "w") as fs:
 
 # Create MANIFEST.in
 with open(abspath("python/MANIFEST.in"), "w") as fm:
-    fm.write("include libdlf/lib/filters.json\n")
     fm.write("include libdlf/lib/LICENSE\n")
-    fm.write("include libdlf/lib/*/*.txt\n")
+    fm.write("include libdlf/lib/*/*.npz\n")
     fm.write("include LICENSE\n")
     fm.write("exclude MANIFEST.in\n")
     fm.write("exclude setup.cfg\n")
 
 
 # Read json
-with open(abspath('python/libdlf/lib/filters.json')) as fj:
+with open(os.path.join(path_lib, 'filters.json')) as fj:
     lib = json.load(fj)
 
 
 # Create init file
-with open(abspath('python/libdlf/__init__.py'), 'w') as fi:
+with open(os.path.join(path_libdlf, '__init__.py'), 'w') as fi:
 
     # Loop over transforms and add them
     for transform, flist in lib.items():
@@ -87,7 +89,7 @@ with open(abspath('python/libdlf/__init__.py'), 'w') as fi:
 for transform, flist in lib.items():
 
     # Create transform file and loop over filters
-    with open(abspath(f"python/libdlf/{transform}.py"), "w") as ft:
+    with open(os.path.join(path_libdlf, f"{transform}.py"), "w") as ft:
 
         # Imports
         ft.write("import os\n")
@@ -99,10 +101,7 @@ for transform, flist in lib.items():
         ft.write("',\n]\n\n")
 
         # Path of the library
-        ft.write("_LIBPATH = os.path.abspath(os.path.dirname(__file__))\n")
-
-        # Cache for the filters
-        ft.write("_CACHE = {}\n\n\n")
+        ft.write("_LIBPATH = os.path.abspath(os.path.dirname(__file__))\n\n\n")
 
         # Number of filters for this transform
         nr_filt = len(flist)
@@ -112,6 +111,12 @@ for transform, flist in lib.items():
 
             # File path and name of the filter
             fname = f"{filt['file']}"
+
+            # Convert txt to npz
+            txtfile = np.loadtxt(os.path.join(path_libdlf, fname), unpack=True)
+            np.savez_compressed(
+                os.path.join(path_libdlf, fname[:-4]), dlf=txtfile
+            )
 
             # Start the function
             ft.write(f"def {filt['name']}():")
@@ -155,15 +160,25 @@ for transform, flist in lib.items():
 
             # Write function; we use np.loadtxt to read the files
             ft.write(
-                f"    if '{filt['name']}' not in _CACHE.keys():\n"
-                f"        fname = '{fname}'\n"
-                f"        _CACHE['{filt['name']}'] = np.loadtxt(\n"
-                "            os.path.join(_LIBPATH, fname), unpack=True)\n"
-                f"    return _CACHE['{filt['name']}']\n")
+                f"    if getattr({filt['name']}, 'cache', None) is None:\n"
+                f"        fname = '{fname[:-3]}npz'\n"
+                f"        {filt['name']}.cache = np.load(\n"
+                "            os.path.join(_LIBPATH, fname))['dlf']\n"
+                f"    return {filt['name']}.cache\n")
+
+            # Add values to function
+            ft.write(
+                f"\n\n{filt['name']}.values = {filt['values'].split(',')}\n")
 
             # Empty lines after function (except for last filter)
             if f_i < nr_filt-1:
                 ft.write("\n\n")
+
+            # Remove txt file.
+            os.remove(os.path.join(path_libdlf, fname))
+
+# Remove json file.
+os.remove(os.path.join(path_lib, 'filters.json'))
 
 
 # Write tests
