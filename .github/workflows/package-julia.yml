@@ -89,7 +89,7 @@ jobs:
         uses: peter-evans/commit-comment@v1
         with:
           body: |
-            @JuliaRegistrator register subdir=LibDLF.jl 
+            @JuliaRegistrator register subdir=LibDLF.jl branch=package-julia
           sha:  ${{ steps.get-sha.outputs.last_sha }}
       
      
