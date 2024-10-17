@@ -24,12 +24,12 @@ jobs:
       matrix:
         os: [ubuntu, macos, windows]
         case:
-          - python-version: 3.8
+          - python-version: 3.11
 
     steps:
 
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4.2.1
         with:
           fetch-depth: 100
           persist-credentials: false
@@ -38,7 +38,7 @@ jobs:
         run: git fetch origin 'refs/tags/*:refs/tags/*'
 
       - name: Setup Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5.2.0
         with:
           python-version: ${{ matrix.case.python-version }}
 
@@ -64,7 +64,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4.2.1
         with:
           fetch-depth: 100
           persist-credentials: false
@@ -73,7 +73,7 @@ jobs:
         run: git fetch origin 'refs/tags/*:refs/tags/*'
 
       - name: Setup Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5.2.0
         with:
           python-version: ${{ matrix.case.python-version }}
 
