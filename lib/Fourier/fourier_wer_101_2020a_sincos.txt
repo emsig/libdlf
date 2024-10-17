@@ -1,7 +1,8 @@
 # 101 point Fourier filter, Sine and Cosine
 # =========================================
 #
-# Designed and tested for TEM data with short offsets and high resistive ground.
+# Designed and tested for TEM data with short offsets and high resistive
+# ground.
 #
 # See the notebook `fourier_wer_101_2020a.ipynb` in the repo
 # https://github.com/emsig/new-filters

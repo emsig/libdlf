@@ -51,7 +51,7 @@ jobs:
         run: |
           cd packages
           python create_python.py
-          pip install python/. --use-feature=in-tree-build
+          pip install python/.
           cd python
           pytest --flake8
 
