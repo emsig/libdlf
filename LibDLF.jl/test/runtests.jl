@@ -178,4 +178,22 @@ end
 		base, fsin = LibDLF.Fourier.grayver_50_2021()
 		@test fsin_test(base,fsin) < test_rtol
 	end
+
+	@testset "wer_201_2018" begin
+		base, fsin, fcos = LibDLF.Fourier.wer_201_2018()
+		@test fsin_test(base,fsin) < test_rtol
+		@test fcos_test(base,fcos) < test_rtol
+	end
+
+	@testset "wer_101_2020a" begin
+		base, fsin, fcos = LibDLF.Fourier.wer_101_2020a()
+		@test fsin_test(base,fsin) < test_rtol
+		@test fcos_test(base,fcos) < test_rtol
+	end
+
+	@testset "wer_101_2020b" begin
+		base, fsin, fcos = LibDLF.Fourier.wer_101_2020b()
+		@test fsin_test(base,fsin) < test_rtol
+		@test fcos_test(base,fcos) < test_rtol
+	end
 end

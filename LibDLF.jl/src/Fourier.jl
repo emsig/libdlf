@@ -266,4 +266,153 @@ function grayver_50_2021()
 	return cache["grayver_50_2021"]
 end
 
+"""
+	 wer_201_2018()
+
+ 201 point Fourier filter, Sine and Cosine
+
+
+ Designed and tested for controlled-source electromagnetic data.
+
+ See the notebook `Filter-wer201-SineCosine.ipynb` in the repo
+ https://github.com/emsig/article-fdesign
+
+
+ > Werthmüller, D., K. Key, and E. Slob, 2019;
+ > A tool for designing digital filters for the Hankel and Fourier
+ > transforms in potential, diffusive, and wavefield modeling;
+ > Geophysics, 84(2), F47-F56;
+ > DOI: 10.1190/geo2018-0069.1
+
+
+ Copyright 2018 Dieter Werthmüller
+
+ This work is licensed under a CC BY 4.0 license.
+ <http://creativecommons.org/licenses/by/4.0/>.
+
+# Returns
+
+base, fsin, fcos :: Array{Float64,1}
+Filter base and its values.
+
+# Example
+
+```julia
+base, fsin, fcos = LibDLF.Fourier.wer_201_2018()
+```
+
+"""
+function wer_201_2018()
+	if !haskey(cache,"wer_201_2018") # read and add to cache
+		bfile = joinpath(libpath,"lib/Fourier/fourier_wer_201_2018_sincos.txt.bin")
+		bdat = Array{Float64}(undef,201,3)
+		read!(open(bfile,"r"),bdat)
+		bdat .= ltoh(bdat) # file save with little endian so convert to host's endian
+		cache["wer_201_2018"]= tuple([bdat[:,c] for c in 1:size(bdat,2)]...)
+	end
+	return cache["wer_201_2018"]
+end
+
+"""
+	 wer_101_2020a()
+
+ 101 point Fourier filter, Sine and Cosine
+
+
+ Designed and tested for TEM data with short offsets and high resistive
+ ground.
+
+ See the notebook `fourier_wer_101_2020a.ipynb` in the repo
+ https://github.com/emsig/new-filters
+
+ This is based on the filter `fourier_wer_201_2018_sincos` from the article
+ (https://github.com/emsig/article-fdesign)
+
+
+ > Werthmüller, D., K. Key, and E. Slob, 2019;
+ > A tool for designing digital filters for the Hankel and Fourier
+ > transforms in potential, diffusive, and wavefield modeling;
+ > Geophysics, 84(2), F47-F56;
+ > DOI: 10.1190/geo2018-0069.1
+
+
+ Copyright 2020 Dieter Werthmüller
+
+ This work is licensed under a CC BY 4.0 license.
+ <http://creativecommons.org/licenses/by/4.0/>.
+
+# Returns
+
+base, fsin, fcos :: Array{Float64,1}
+Filter base and its values.
+
+# Example
+
+```julia
+base, fsin, fcos = LibDLF.Fourier.wer_101_2020a()
+```
+
+"""
+function wer_101_2020a()
+	if !haskey(cache,"wer_101_2020a") # read and add to cache
+		bfile = joinpath(libpath,"lib/Fourier/fourier_wer_101_2020a_sincos.txt.bin")
+		bdat = Array{Float64}(undef,101,3)
+		read!(open(bfile,"r"),bdat)
+		bdat .= ltoh(bdat) # file save with little endian so convert to host's endian
+		cache["wer_101_2020a"]= tuple([bdat[:,c] for c in 1:size(bdat,2)]...)
+	end
+	return cache["wer_101_2020a"]
+end
+
+"""
+	 wer_101_2020b()
+
+ 101 point Fourier filter, Sine and Cosine
+
+
+ Designed and tested for TEM data with short offsets and high resistive
+ ground.
+
+ See the notebook `fourier_wer_101_2020b.ipynb` in the repo
+ https://github.com/emsig/new-filters
+
+ This is based on the filter `fourier_wer_201_2018_sincos` from the article
+ (https://github.com/emsig/article-fdesign)
+
+
+ > Werthmüller, D., K. Key, and E. Slob, 2019;
+ > A tool for designing digital filters for the Hankel and Fourier
+ > transforms in potential, diffusive, and wavefield modeling;
+ > Geophysics, 84(2), F47-F56;
+ > DOI: 10.1190/geo2018-0069.1
+
+
+ Copyright 2020 Dieter Werthmüller
+
+ This work is licensed under a CC BY 4.0 license.
+ <http://creativecommons.org/licenses/by/4.0/>.
+
+# Returns
+
+base, fsin, fcos :: Array{Float64,1}
+Filter base and its values.
+
+# Example
+
+```julia
+base, fsin, fcos = LibDLF.Fourier.wer_101_2020b()
+```
+
+"""
+function wer_101_2020b()
+	if !haskey(cache,"wer_101_2020b") # read and add to cache
+		bfile = joinpath(libpath,"lib/Fourier/fourier_wer_101_2020b_sincos.txt.bin")
+		bdat = Array{Float64}(undef,101,3)
+		read!(open(bfile,"r"),bdat)
+		bdat .= ltoh(bdat) # file save with little endian so convert to host's endian
+		cache["wer_101_2020b"]= tuple([bdat[:,c] for c in 1:size(bdat,2)]...)
+	end
+	return cache["wer_101_2020b"]
+end
+
 end
