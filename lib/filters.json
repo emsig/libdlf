@@ -199,6 +199,33 @@
       "points": 50,
       "values": "sin",
       "file": "lib/Fourier/fourier_grayver_50_2021_sin.txt"
+    },
+    {
+      "name" : "wer_201_2018",
+      "author": "Dieter Werthmüller",
+      "year": "2018",
+      "appendix": "",
+      "points": 201,
+      "values": "sin,cos",
+      "file": "lib/Fourier/fourier_wer_201_2018_sincos.txt"
+    },
+    {
+      "name" : "wer_101_2020a",
+      "author": "Dieter Werthmüller",
+      "year": "2020",
+      "appendix": "a",
+      "points": 101,
+      "values": "sin,cos",
+      "file": "lib/Fourier/fourier_wer_101_2020a_sincos.txt"
+    },
+    {
+      "name" : "wer_101_2020b",
+      "author": "Dieter Werthmüller",
+      "year": "2020",
+      "appendix": "b",
+      "points": 101,
+      "values": "sin,cos",
+      "file": "lib/Fourier/fourier_wer_101_2020b_sincos.txt"
     }
   ]
 }
