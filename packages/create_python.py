@@ -38,7 +38,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "libdlf"
 description = "Library for Digital Linear Filters (DLF)"
-readme = "Library for Digital Linear Filters (DLF) as used, for instance, in Geophysics for electromagnetic modelling. See https://github.com/emsig/libdlf"
+readme = "README.md"
 requires-python = ">=3.10"
 authors = [
   {{name = "The emsig community", email = "info@emsig.xyz"}},
