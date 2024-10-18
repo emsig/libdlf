@@ -31,35 +31,62 @@ shutil.copyfile('../LICENSE', 'python/libdlf/lib/LICENSE')
 shutil.copyfile('LICENSE', 'python/LICENSE')
 
 # Create setup.py
-setup = f"""# -*- coding: utf-8 -*-
-from setuptools import setup
+project = f"""[build-system]
+requires = ["setuptools>=64", "setuptools_scm>=8"]
+build-backend = "setuptools.build_meta"
 
-# Longer description
-readme = ('Library for Digital Linear Filters (DLF) as used, for instance, '
-          'in Geophysics for electromagnetic modelling. See '
-          'https://github.com/emsig/libdlf')
+[project]
+name = "libdlf"
+description = "Library for Digital Linear Filters (DLF)"
+readme = "Library for Digital Linear Filters (DLF) as used, for instance, in Geophysics for electromagnetic modelling. See https://github.com/emsig/libdlf"
+requires-python = ">=3.10"
+authors = [
+  {{name = "The emsig community", email = "info@emsig.xyz"}},
+]
+dependencies = [
+    "numpy",
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python",
+]
+version ="{version}"
 
-setup(
-    name="libdlf",
-    version="{version}",
-    description="Library for Digital Linear Filters (DLF)",
-    long_description=readme,
-    author="The emsig community",
-    author_email="info@emsig.xyz",
-    url="https://github.com/emsig/libdlf",
-    license="BSD-3-Clause",
-    packages=["libdlf"],
-    include_package_data=True,
-    install_requires=["numpy"],
-)
+[project.license]
+file = "LICENSE"
+
+[project.urls]
+Homepage = "https://github.com/emsig/libdlf"
+Documentation = "https://github.com/emsig/libdlf"
+Repository = "https://github.com/emsig/libdlf"
+
+[project.optional-dependencies]
+build = [
+    "setuptools_scm>=8",
+    "setuptools>=64",
+]
+
+[tool.setuptools.packages.find]
+include = ["libdlf*"]
+
+[tool.flake8]
+per-file-ignores = [
+    "__init__.py: F401",
+]
 """
-with open(abspath("python/setup.py"), "w") as fs:
-    fs.write(setup)
+with open(abspath("python/pyproject.toml"), "w") as fs:
+    fs.write(project)
 
-# Create setup.cfg
-with open(abspath("python/setup.cfg"), "w") as fs:
-    fs.write("[flake8]\n")
-    fs.write("per-file-ignores = __init__.py: F401")
+# Create .git_archival.txt
+with open(abspath("python/.git_archival.txt"), "w") as fs:
+    fs.write("node: $Format:%H$\n")
+    fs.write("node-date: $Format:%cI$\n")
+    fs.write("describe-name: $Format:%(describe:tags=true,match=*[0-9]*)$")
+
+# Create .gitattributes
+with open(abspath("python/.gitattributes"), "w") as fs:
+    fs.write(".git_archival.txt  export-subst")
 
 # Create MANIFEST.in
 with open(abspath("python/MANIFEST.in"), "w") as fm:
@@ -67,8 +94,8 @@ with open(abspath("python/MANIFEST.in"), "w") as fm:
     fm.write("include libdlf/lib/*/*.npz\n")
     fm.write("include LICENSE\n")
     fm.write("exclude MANIFEST.in\n")
-    fm.write("exclude setup.cfg\n")
-
+    fm.write("exclude .git_archival.txt\n")
+    fm.write("exclude .gitattributes")
 
 # Read json
 with open(os.path.join(path_lib, 'filters.json')) as fj:
